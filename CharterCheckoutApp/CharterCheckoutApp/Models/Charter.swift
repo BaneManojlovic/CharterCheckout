@@ -10,4 +10,7 @@ import Foundation
 struct Charter: Decodable {
     let title: String
     let description: String
+    var location: String?
+    var rating: Double?
+    var reviewCount: Int?
 }

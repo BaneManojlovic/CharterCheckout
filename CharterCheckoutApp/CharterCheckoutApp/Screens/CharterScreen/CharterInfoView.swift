@@ -9,33 +9,41 @@ import SwiftUI
 import SwiftData
 
 struct CharterInfoView: View {
-
+    
     @State private var charterInfoViewModel = CharterInfoViewModel()
-
+    
     var body: some View {
-        List {
-            if let charter = charterInfoViewModel.charter {
-                Section("Charter") {
-                    Text(charter.title)
-                    Text(charter.description)
-                        .lineLimit(2)
-                        .truncationMode(.tail)
-
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                GalleryView()
+                
+                VStack(alignment: .leading, spacing: 16) {
+                    CharterInfoSectionView(charter: charterInfoViewModel.charter,
+                                           isLoading: charterInfoViewModel.isLoading)
+                    SelectorRowView()
+                    packagesSection
                 }
-            } else if charterInfoViewModel.isLoading {
-                ProgressView()
+                .padding(.horizontal)
+                .padding(.top, 16)
             }
-            
-            Section("Packages") {
-                ForEach(charterInfoViewModel.packages) { package in
-                    Text(package.title)
-                }
-            }
-            
         }
+        .ignoresSafeArea(edges: .top)
         .task {
             await charterInfoViewModel.getCharterInfo()
             await charterInfoViewModel.getPackagesList()
         }
     }
+
+    // MARK: - 3. Packages
+    private var packagesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Available trips")
+                .font(.headline)
+            
+            ForEach(charterInfoViewModel.packages) { package in
+                TripCellView(package: package)
+            }
+        }
+    }
+    
 }
