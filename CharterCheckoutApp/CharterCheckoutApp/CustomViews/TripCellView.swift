@@ -11,6 +11,7 @@ import SwiftUI
 struct TripCellView: View {
 
     let package: Package
+    let onReserve: () -> Void
 
     var body: some View {
         
@@ -43,9 +44,7 @@ struct TripCellView: View {
             
             Spacer(minLength: 10)
             
-            Button {
-                // TODO: - make action
-            } label: {
+            Button(action: onReserve) {
                 Text("Reserve")
                     .frame(maxWidth: .infinity)
             }
