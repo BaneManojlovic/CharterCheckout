@@ -32,6 +32,27 @@ struct CharterInfoSectionView: View {
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                } else {
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("no location specified")
+                        if let rating = charter.rating {
+                            Text("·")
+                            Image(systemName: "star").foregroundStyle(.orange)
+                            Text(String(format: "%.1f", rating))
+                        } else {
+                            Text("·")
+                            Image(systemName: "star").foregroundStyle(.orange)
+                            Text(String(format: "%.1f", 0))
+                        }
+                        if let reviewCount = charter.reviewCount {
+                            Text("(\(reviewCount))")
+                        } else {
+                            Text("(0)")
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
 
                 Text(charter.description)

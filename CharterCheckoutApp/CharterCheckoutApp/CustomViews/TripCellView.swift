@@ -27,12 +27,14 @@ struct TripCellView: View {
                     
                 }
             }
-
+            
             HStack(spacing: 8) {
                 Label("\(Int(package.hours)) hours", systemImage: "clock")
-//                if let max = package.maxPersons {
-                Label("up to \(package.minPersons)", systemImage: "person.2")
-//                }
+                if let max = package.maxPersons {
+                    Label("up to \(package.minPersons)", systemImage: "person.2")
+                } else {
+                    Label("up to no limit", systemImage: "person.2")
+                }
                 Spacer()
                 Text("per trip")
             }
