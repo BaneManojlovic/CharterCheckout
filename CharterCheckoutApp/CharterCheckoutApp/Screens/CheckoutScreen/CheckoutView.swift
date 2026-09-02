@@ -39,14 +39,14 @@ struct CheckoutView: View {
         SectionCard(title: "Your Trip") {
             VStack(alignment: .leading, spacing: 6) {
                 Text(viewModel.package.title).font(.subheadline.bold())
-                Text(viewModel.date, format: .dateTime.month(.abbreviated).day())
+                Text(viewModel.date.formattedShort)
                     .font(.caption).foregroundStyle(.secondary)
                 Text("\(viewModel.groupSize) guests")
                     .font(.caption).foregroundStyle(.secondary)
                 HStack {
                     Text("Total")
                     Spacer()
-                    Text(formatted(viewModel.package.price)).font(.headline)
+                    Text(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)).font(.headline)
                 }
             }
         }
@@ -129,19 +129,9 @@ struct CheckoutView: View {
     private func subtitle(for option: PaymentOption) -> String {
         switch option {
         case .full:
-            return "Charge \(formatted(viewModel.package.price)) today"
+            return "Charge \(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)) today"
         case .deposit:
-            return "Pay \(formatted(viewModel.depositAmount)) now, \(formatted(viewModel.remainingAmount)) due later"
+            return "Pay \(viewModel.depositAmount.asCurrencyString(code: viewModel.package.currency)) now, \(viewModel.remainingAmount.asCurrencyString(code: viewModel.package.currency)) due later"
         }
-    }
-
-    // .formatted() on the value directly sidesteps the Text(_:format:) locale
-    // quirk from the trip cards — no environment override needed here.
-    private func formatted(_ amount: Double) -> String {
-        amount.formatted(
-            .currency(code: viewModel.package.currency)
-                .locale(Locale(identifier: "en_US"))
-                .precision(.fractionLength(0...2))
-        )
     }
 }

@@ -27,12 +27,6 @@ struct CharterInfoView: View {
         }
     }
     
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter.string(from: charterInfoViewModel.selectedDate)
-    }
-    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -42,7 +36,7 @@ struct CharterInfoView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     CharterInfoSectionView(charter: charterInfoViewModel.charter,
                                            isLoading: charterInfoViewModel.isLoading)
-                    SelectorRowView(dateLabel: formattedDate,
+                    SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
                                     guestsLabel: "\(charterInfoViewModel.groupSize) persons",
                                     onDateTap: { showDatePicker = true },
                                     onGuestsTap: { showGroupSizePicker = true })

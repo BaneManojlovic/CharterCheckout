@@ -23,7 +23,7 @@ struct TripCellView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 0) {
-                    Text(formattedPrice)
+                    Text(package.price.asCurrencyString(code: package.currency))
                         .font(.headline)
                     
                 }
@@ -55,16 +55,5 @@ struct TripCellView: View {
             RoundedRectangle(cornerRadius: 14)
                 .stroke(Color(.systemGray2), lineWidth: 1)
         )
-    }
-    
-    // TODO: - Move this in helper
-    private var formattedPrice: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.currencyCode = package.currency
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
-        return formatter.string(from: NSNumber(value: package.price)) ?? "\(package.price)"
     }
 }
