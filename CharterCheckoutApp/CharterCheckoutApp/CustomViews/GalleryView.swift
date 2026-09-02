@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct GalleryView: View {
+    
+    let onBackTap: () -> Void
+    let onLikeTap: () -> Void
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -23,17 +26,19 @@ struct GalleryView: View {
             .frame(height: 340)
             
             HStack {
-                Button(action: {}) {
+                Button(action: onBackTap) {
                     Image(systemName: "chevron.left")
                         .padding(10)
                         .background(.white.opacity(0.9), in: Circle())
                 }
+                .buttonStyle(.plain)
                 Spacer()
-                Button(action: {}) {
+                Button(action: onLikeTap) {
                     Image(systemName: "heart")
                         .padding(10)
                         .background(.white.opacity(0.9), in: Circle())
                 }
+                .buttonStyle(.plain)
             }
             .padding()
             .padding(.top, 40)

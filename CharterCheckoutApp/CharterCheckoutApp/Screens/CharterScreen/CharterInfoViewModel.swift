@@ -15,6 +15,10 @@ class CharterInfoViewModel {
     var packages: [Package] = []
     var isLoading = false
     var errorMessage: String?
+    var selectedDate: Date = Date()
+    var adults: Int = 2
+    var children: Int = 0
+    var groupSize: Int { adults + children }
     
     // MARK: - Methods
     

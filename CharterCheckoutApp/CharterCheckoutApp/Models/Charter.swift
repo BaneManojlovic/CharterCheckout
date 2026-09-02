@@ -12,5 +12,5 @@ struct Charter: Decodable {
     let description: String
     var location: String?
     var rating: Double?
-    var reviewCount: Int?
+    var reviewCount: Int?   
 }

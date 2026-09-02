@@ -10,14 +10,21 @@ import SwiftUI
 
 struct SelectorRowView: View {
     
+    let dateLabel: String
+    let guestsLabel: String
+    let onDateTap: () -> Void
+    let onGuestsTap: () -> Void
+    
     var body: some View {
         HStack(spacing: 12) {
-            Button(action: {}) {
-                selectorLabel(icon: "calendar", title: "Date", value: "Jan 31")
+            Button(action: onDateTap) {
+                selectorLabel(icon: "calendar", title: "Date", value: dateLabel)
             }
-            Button(action: {}) {
-                selectorLabel(icon: "person.2", title: "Guests", value: "2 persons")
+            .buttonStyle(.plain)
+            Button(action: onGuestsTap) {
+                selectorLabel(icon: "person.2", title: "Guests", value: guestsLabel)
             }
+            .buttonStyle(.plain)
         }
     }
 
