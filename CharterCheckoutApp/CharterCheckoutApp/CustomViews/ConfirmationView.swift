@@ -27,14 +27,9 @@ struct ConfirmationView: View {
                         .foregroundStyle(.secondary)
                 }
                 
-                SectionCard(title: "Your Trip") {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(viewModel.package.title).font(.subheadline.bold())
-                        Text("\(viewModel.groupSize) guests")
-                            .font(.caption).foregroundStyle(.secondary)
-                        Text(viewModel.paymentOption.label)
-                            .font(.caption).foregroundStyle(.secondary)
-                    }
+                TripSummaryCard(package: viewModel.package, groupSize: viewModel.groupSize) {
+                    Text(viewModel.paymentOption.label)
+                        .font(.caption).foregroundStyle(.secondary)
                 }
                 
                 PrimaryButton(title: "Done", action: onDone)

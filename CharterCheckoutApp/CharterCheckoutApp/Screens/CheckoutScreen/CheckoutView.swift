@@ -36,18 +36,13 @@ struct CheckoutView: View {
     }
 
     private var bookingSummarySection: some View {
-        SectionCard(title: "Your Trip") {
-            VStack(alignment: .leading, spacing: 6) {
-                Text(viewModel.package.title).font(.subheadline.bold())
-                Text(viewModel.date.formattedShort)
-                    .font(.caption).foregroundStyle(.secondary)
-                Text("\(viewModel.groupSize) guests")
-                    .font(.caption).foregroundStyle(.secondary)
-                HStack {
-                    Text("Total")
-                    Spacer()
-                    Text(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)).font(.headline)
-                }
+        TripSummaryCard(package: viewModel.package, groupSize: viewModel.groupSize) {
+            Text(viewModel.date.formattedShort)
+                .font(.caption).foregroundStyle(.secondary)
+            HStack {
+                Text("Total")
+                Spacer()
+                Text(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)).font(.headline)
             }
         }
     }
@@ -73,23 +68,13 @@ struct CheckoutView: View {
         SectionCard(title: "Payment Option") {
             VStack(spacing: 10) {
                 ForEach(PaymentOption.allCases) { option in
-                    Button {
+                    PaymentOptionRow(
+                        option: option,
+                        subtitle: subtitle(for: option),
+                        isSelected: viewModel.paymentOption == option
+                    ) {
                         viewModel.paymentOption = option
-                    } label: {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(option.label).foregroundStyle(.primary)
-                                Text(subtitle(for: option))
-                                    .font(.caption).foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: viewModel.paymentOption == option ? "checkmark.circle.fill" : "circle")
-                                .foregroundStyle(viewModel.paymentOption == option ? Color.blue : Color.secondary)
-                        }
-                        .padding(10)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(.separator)))
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
