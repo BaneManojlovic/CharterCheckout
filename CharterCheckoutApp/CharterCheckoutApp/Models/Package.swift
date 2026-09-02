@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Package: Decodable, Identifiable {
+struct Package: Decodable, Identifiable, Hashable {
     let id: String
     let title: String
     let description: String

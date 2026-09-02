@@ -34,17 +34,11 @@ struct DatePickerSheetView: View {
                 .datePickerStyle(.graphical)
                 .padding(.horizontal)
 
-            Button {
+            PrimaryButton(title: "Confirm") {
                 selectedDate = tempDate
                 dismiss()
-            } label: {
-                Text("Confirm").frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 12))
-            .controlSize(.large)
             .padding(.horizontal)
         }
-       
     }
 }

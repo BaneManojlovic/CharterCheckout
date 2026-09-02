@@ -11,6 +11,7 @@ import SwiftUI
 struct TripCellView: View {
 
     let package: Package
+    let onReserve: () -> Void
 
     var body: some View {
         
@@ -22,7 +23,7 @@ struct TripCellView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 0) {
-                    Text(formattedPrice)
+                    Text(package.price.asCurrencyString(code: package.currency))
                         .font(.headline)
                     
                 }
@@ -31,7 +32,7 @@ struct TripCellView: View {
             HStack(spacing: 8) {
                 Label("\(Int(package.hours)) hours", systemImage: "clock")
                 if let max = package.maxPersons {
-                    Label("up to \(package.minPersons)", systemImage: "person.2")
+                    Label("up to \(max)", systemImage: "person.2")
                 } else {
                     Label("up to no limit", systemImage: "person.2")
                 }
@@ -42,16 +43,8 @@ struct TripCellView: View {
             .foregroundStyle(Color(.systemGray))
             
             Spacer(minLength: 10)
-            
-            Button {
-                // TODO: - make action
-            } label: {
-                Text("Reserve")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 12))
-            .controlSize(.large)
+
+            PrimaryButton(title: "Reserve", action: onReserve)
         }
         .padding()
         .background(
@@ -62,16 +55,5 @@ struct TripCellView: View {
             RoundedRectangle(cornerRadius: 14)
                 .stroke(Color(.systemGray2), lineWidth: 1)
         )
-    }
-    
-    // TODO: - Move this in helper
-    private var formattedPrice: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.currencyCode = package.currency
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
-        return formatter.string(from: NSNumber(value: package.price)) ?? "\(package.price)"
     }
 }

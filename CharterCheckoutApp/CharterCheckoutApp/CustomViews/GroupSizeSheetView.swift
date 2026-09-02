@@ -43,18 +43,12 @@ struct GroupSizeSheetView: View {
             .padding(.horizontal)
 
             Spacer()
-
-            Button {
+            
+            PrimaryButton(title: "Confirm") {
                 adults = tempAdults
                 children = tempChildren
                 dismiss()
-            } label: {
-                Text("Confirm").frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 12))
-            .controlSize(.large)
-            .padding(.horizontal)
         }
         .padding(.horizontal)
         .padding(.top, 24)
