@@ -14,11 +14,17 @@ struct CharterInfoView: View {
     @State private var showDatePicker = false
     @State private var showGroupSizePicker = false
     @State private var showAlert = false
-    
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter.string(from: charterInfoViewModel.selectedDate)
+    @State private var selectedPackageForCheckout: Package?
+
+    private var packagesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Available trips").font(.headline)
+            ForEach(charterInfoViewModel.packages) { package in
+                TripCellView(package: package) {
+                    selectedPackageForCheckout = package
+                }
+            }
+        }
     }
     
     var body: some View {
@@ -30,7 +36,7 @@ struct CharterInfoView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     CharterInfoSectionView(charter: charterInfoViewModel.charter,
                                            isLoading: charterInfoViewModel.isLoading)
-                    SelectorRowView(dateLabel: formattedDate,
+                    SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
                                     guestsLabel: "\(charterInfoViewModel.groupSize) persons",
                                     onDateTap: { showDatePicker = true },
                                     onGuestsTap: { showGroupSizePicker = true })
@@ -63,18 +69,13 @@ struct CharterInfoView: View {
         .alert("Not yet implemented", isPresented: $showAlert) {
             Button("OK", role: .cancel) {}
         }
-    }
-
-    // MARK: - 3. Packages
-    private var packagesSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Available trips")
-                .font(.headline)
-            
-            ForEach(charterInfoViewModel.packages) { package in
-                TripCellView(package: package)
-            }
+        .navigationDestination(item: $selectedPackageForCheckout) { package in
+            CheckoutView(
+                package: package,
+                date: charterInfoViewModel.selectedDate,
+                groupSize: charterInfoViewModel.groupSize,
+                onDismissToRoot: { selectedPackageForCheckout = nil }
+            )
         }
     }
-    
 }

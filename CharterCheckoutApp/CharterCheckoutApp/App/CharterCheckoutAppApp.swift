@@ -12,7 +12,9 @@ struct CharterCheckoutAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CharterInfoView()
+            NavigationStack {
+                CharterInfoView()
+            }
         }
     }
 }
