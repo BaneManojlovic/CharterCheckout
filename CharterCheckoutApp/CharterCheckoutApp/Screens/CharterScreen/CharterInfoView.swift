@@ -30,7 +30,8 @@ struct CharterInfoView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                GalleryView(onBackTap: { showAlert = true },
+                GalleryView(photos: charterInfoViewModel.photos,
+                            onBackTap: { showAlert = true },
                             onLikeTap: { showAlert = true })
                 
                 VStack(alignment: .leading, spacing: 16) {
@@ -50,6 +51,7 @@ struct CharterInfoView: View {
         .task {
             await charterInfoViewModel.getCharterInfo()
             await charterInfoViewModel.getPackagesList()
+            await charterInfoViewModel.getPhotos()
         }
         .sheet(isPresented: $showDatePicker) {
             DatePickerSheetView(selectedDate: $charterInfoViewModel.selectedDate)
