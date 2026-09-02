@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 
 struct ConfirmationView: View {
-
+    
     let viewModel: CheckoutViewModel
     let onDone: () -> Void
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -26,6 +26,7 @@ struct ConfirmationView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
+                
                 SectionCard(title: "Your Trip") {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(viewModel.package.title).font(.subheadline.bold())
@@ -35,14 +36,8 @@ struct ConfirmationView: View {
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
-                Button {
-                    onDone()
-                } label: {
-                    Text("Done").frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.roundedRectangle(radius: 12))
-                .controlSize(.large)
+                
+                PrimaryButton(title: "Done", action: onDone)
             }
             .padding()
         }

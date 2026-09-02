@@ -32,7 +32,7 @@ struct TripCellView: View {
             HStack(spacing: 8) {
                 Label("\(Int(package.hours)) hours", systemImage: "clock")
                 if let max = package.maxPersons {
-                    Label("up to \(package.minPersons)", systemImage: "person.2")
+                    Label("up to \(max)", systemImage: "person.2")
                 } else {
                     Label("up to no limit", systemImage: "person.2")
                 }
@@ -43,14 +43,8 @@ struct TripCellView: View {
             .foregroundStyle(Color(.systemGray))
             
             Spacer(minLength: 10)
-            
-            Button(action: onReserve) {
-                Text("Reserve")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 12))
-            .controlSize(.large)
+
+            PrimaryButton(title: "Reserve", action: onReserve)
         }
         .padding()
         .background(

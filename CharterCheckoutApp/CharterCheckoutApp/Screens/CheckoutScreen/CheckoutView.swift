@@ -114,22 +114,16 @@ struct CheckoutView: View {
     }
 
     private var submitButton: some View {
-        Button {
+        PrimaryButton(
+            title: "Confirm Booking",
+            isLoading: viewModel.isSubmitting,
+            isDisabled: !viewModel.isFormValid || viewModel.isSubmitting
+        ) {
             Task {
                 await viewModel.submit()
                 isConfirmed = true
             }
-        } label: {
-            if viewModel.isSubmitting {
-                ProgressView().tint(.white).frame(maxWidth: .infinity)
-            } else {
-                Text("Confirm Booking").frame(maxWidth: .infinity)
-            }
         }
-        .buttonStyle(.borderedProminent)
-        .buttonBorderShape(.roundedRectangle(radius: 12))
-        .controlSize(.large)
-        .disabled(!viewModel.isFormValid || viewModel.isSubmitting)
     }
 
     private func subtitle(for option: PaymentOption) -> String {
@@ -149,20 +143,5 @@ struct CheckoutView: View {
                 .locale(Locale(identifier: "en_US"))
                 .precision(.fractionLength(0...2))
         )
-    }
-}
-
-struct SectionCard<Content: View>: View {
-    let title: String
-    @ViewBuilder let content: Content
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(title).font(.headline)
-            content
-        }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 14).fill(Color(.secondarySystemBackground)))
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(.separator), lineWidth: 1))
     }
 }
