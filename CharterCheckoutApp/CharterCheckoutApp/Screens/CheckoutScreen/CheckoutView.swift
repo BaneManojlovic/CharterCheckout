@@ -49,17 +49,25 @@ struct CheckoutView: View {
 
     private var customerDetailsSection: some View {
         SectionCard(title: "Your Details") {
-            VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 TextField("First name", text: $viewModel.customer.firstName)
+                fieldError("First name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isFirstNameValid)
                 Divider()
+
                 TextField("Last name", text: $viewModel.customer.lastName)
+                fieldError("Last name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isLastNameValid)
                 Divider()
+
                 TextField("Email", text: $viewModel.customer.email)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
+                fieldError("Enter a valid email address", show: viewModel.hasAttemptedSubmit && !viewModel.isEmailValid)
                 Divider()
+
                 TextField("Phone number", text: $viewModel.customer.phone)
                     .keyboardType(.phonePad)
+                    .filteringInput($viewModel.customer.phone) { InputFilter.phoneFiltered($0) }
+                fieldError("Enter a valid phone number", show: viewModel.hasAttemptedSubmit && !viewModel.isPhoneValid)
             }
         }
     }
@@ -82,31 +90,53 @@ struct CheckoutView: View {
 
     private var cardDetailsSection: some View {
         SectionCard(title: "Card Details") {
-            VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 TextField("Card number", text: $viewModel.card.number)
                     .keyboardType(.numberPad)
+                    .filteringInput($viewModel.card.number) { InputFilter.cardNumberFormatted($0) }
+                fieldError("Enter a valid card number", show: viewModel.hasAttemptedSubmit && !viewModel.isCardNumberValid)
                 Divider()
-                HStack {
-                    TextField("MM/YY", text: $viewModel.card.expiry)
+
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        TextField("MM/YY", text: $viewModel.card.expiry)
+                            .keyboardType(.numberPad)
+                            .filteringInput($viewModel.card.expiry) { InputFilter.expiryFormatted($0) }
+                        fieldError("Invalid expiry", show: viewModel.hasAttemptedSubmit && !viewModel.isExpiryValid)
+                    }
                     Divider()
-                    TextField("CVV", text: $viewModel.card.cvv)
-                        .keyboardType(.numberPad)
+                    VStack(alignment: .leading, spacing: 4) {
+                        TextField("CVV", text: $viewModel.card.cvv)
+                            .keyboardType(.numberPad)
+                            .filteringInput($viewModel.card.cvv) { InputFilter.digitsOnly($0, maxLength: 4) }
+                        fieldError("Invalid CVV", show: viewModel.hasAttemptedSubmit && !viewModel.isCVVValid)
+                    }
                 }
                 Divider()
+
                 TextField("Cardholder name", text: $viewModel.card.cardholderName)
+                fieldError("Cardholder name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isCardholderNameValid)
             }
         }
     }
 
     private var submitButton: some View {
-        PrimaryButton(
-            title: "Confirm Booking",
-            isLoading: viewModel.isSubmitting,
-            isDisabled: !viewModel.isFormValid || viewModel.isSubmitting
-        ) {
-            Task {
-                await viewModel.submit()
-                isConfirmed = true
+        VStack(spacing: 8) {
+            if viewModel.hasAttemptedSubmit && !viewModel.isFormValid {
+                Text("Please fix the highlighted fields above")
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
+            PrimaryButton(
+                title: "Confirm Booking",
+                isLoading: viewModel.isSubmitting,
+                isDisabled: viewModel.isSubmitting
+            ) {
+                Task {
+                    if await viewModel.attemptSubmit() {
+                        isConfirmed = true
+                    }
+                }
             }
         }
     }
@@ -117,6 +147,13 @@ struct CheckoutView: View {
             return "Charge \(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)) today"
         case .deposit:
             return "Pay \(viewModel.depositAmount.asCurrencyString(code: viewModel.package.currency)) now, \(viewModel.remainingAmount.asCurrencyString(code: viewModel.package.currency)) due later"
+        }
+    }
+
+    @ViewBuilder
+    private func fieldError(_ message: String, show: Bool) -> some View {
+        if show {
+            Text(message).font(.caption2).foregroundStyle(.red)
         }
     }
 }
