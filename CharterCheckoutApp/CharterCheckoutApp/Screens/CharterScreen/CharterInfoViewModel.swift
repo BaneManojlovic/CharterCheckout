@@ -19,6 +19,8 @@ class CharterInfoViewModel {
     var adults: Int = 2
     var children: Int = 0
     var groupSize: Int { adults + children }
+    var photos: [CharterPhoto] = []
+
     
     // MARK: - Methods
     
@@ -39,6 +41,15 @@ class CharterInfoViewModel {
             packages = try await APIManager.shared.getPackages()
         } catch {
             errorMessage = "Couldn't load trips."
+        }
+    }
+    
+    func getPhotos() async {
+        do {
+            photos = try await APIManager.shared.getCharterPhotos()
+                .sorted { $0.cardinal < $1.cardinal }
+        } catch {
+            errorMessage = "Couldn't load photos."
         }
     }
 }

@@ -12,6 +12,7 @@ import Observation
 protocol APIManagerProtocol: AnyObject {
     func getCharterInfo() async throws -> Charter
     func getPackages() async throws -> [Package]
+    func getCharterPhotos() async throws -> [CharterPhoto]
 }
 
 @Observable
@@ -57,6 +58,18 @@ final class APIManager: APIManagerProtocol {
         
         let wrapper = try JSONDecoder().decode(APIResponse<[Package]>.self, from: data)
         
+        return wrapper.data
+    }
+    
+    func getCharterPhotos() async throws -> [CharterPhoto] {
+        guard let url = URL(string: "https://fishingbooker.com/api/proxy/charter_photos?charter_id=1128") else {
+            throw URLError(.badURL)
+        }
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+        let wrapper = try JSONDecoder().decode(APIResponse<[CharterPhoto]>.self, from: data)
         return wrapper.data
     }
 }
