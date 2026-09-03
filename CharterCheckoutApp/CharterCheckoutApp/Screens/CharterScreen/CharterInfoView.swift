@@ -32,30 +32,33 @@ struct CharterInfoView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                GalleryView(photos: charterInfoViewModel.photos,
-                            onBackTap: { showAlert = true },
-                            onLikeTap: { showAlert = true })
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    CharterInfoSectionView(charter: charterInfoViewModel.charter,
-                                           isLoading: charterInfoViewModel.isLoading)
-                    SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
-                                    guestsLabel: "\(charterInfoViewModel.groupSize) persons",
-                                    onDateTap: { showDatePicker = true },
-                                    onGuestsTap: { showGroupSizePicker = true })
-                    packagesSection
+            if charterInfoViewModel.charter == nil, let errorMessage = charterInfoViewModel.errorMessage {
+                ErrorStateView(message: errorMessage) {
+                    Task { await charterInfoViewModel.loadInitialData() }
                 }
-                .padding(.horizontal)
-                .padding(.top, 16)
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    GalleryView(photos: charterInfoViewModel.photos,
+                                onBackTap: { showAlert = true },
+                                onLikeTap: { showAlert = true })
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        CharterInfoSectionView(charter: charterInfoViewModel.charter,
+                                               isLoading: charterInfoViewModel.isLoading)
+                        SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
+                                        guestsLabel: "\(charterInfoViewModel.groupSize) persons",
+                                        onDateTap: { showDatePicker = true },
+                                        onGuestsTap: { showGroupSizePicker = true })
+                        packagesSection
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 16)
+                }
             }
         }
         .ignoresSafeArea(edges: .top)
         .task {
-            await charterInfoViewModel.getCharterInfo()
-            await charterInfoViewModel.getPackagesList()
-            await charterInfoViewModel.getPhotos()
-            await charterInfoViewModel.getAvailability()
+            await charterInfoViewModel.loadInitialData()
         }
         .onChange(of: charterInfoViewModel.selectedDate) { _, _ in
             Task { await charterInfoViewModel.getAvailability() }

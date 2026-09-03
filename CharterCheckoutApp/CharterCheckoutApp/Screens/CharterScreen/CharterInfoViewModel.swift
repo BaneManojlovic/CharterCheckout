@@ -24,6 +24,36 @@ class CharterInfoViewModel {
 
     
     // MARK: - Methods
+
+    func loadInitialData() async {
+        errorMessage = nil
+        isLoading = true
+        defer { isLoading = false }
+
+        do {
+            async let charterResult = APIManager.shared.getCharterInfo()
+            async let packagesResult = APIManager.shared.getPackages()
+            async let photosResult = APIManager.shared.getCharterPhotos()
+
+            charter = try await charterResult
+            packages = try await packagesResult
+            photos = try await photosResult
+
+            await getAvailability()
+        } catch {
+            errorMessage = "Couldn't load this charter. Check your connection and try again."
+        }
+    }
+
+    func getAvailability() async {
+        do {
+            availabilityByPackageId = try await APIManager.shared.getPackageAvailabilities(
+                date: selectedDate, groupSize: groupSize
+            )
+        } catch {
+            availabilityByPackageId = [:]
+        }
+    }
     
     func getCharterInfo() async {
         isLoading = true
@@ -54,21 +84,9 @@ class CharterInfoViewModel {
         }
     }
     
-    func getAvailability() async {
-        do {
-            availabilityByPackageId = try await APIManager.shared.getPackageAvailabilities(
-                date: selectedDate,
-                groupSize: groupSize
-            )
-        } catch {
-            errorMessage = "Couldn't load availability."
-        }
-    }
-
     func isAvailable(_ package: Package) -> Bool {
         guard groupSize >= package.minPersons else { return false }
         if let max = package.maxPersons, groupSize > max { return false }
-        // no server data yet (still loading) → don't wrongly block the user
         guard let availability = availabilityByPackageId[package.id] else { return true }
         return availability.available
     }

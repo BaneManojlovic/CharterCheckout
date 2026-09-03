@@ -65,17 +65,3 @@ struct CharterInfoSectionView: View {
         }
     }
 }
-
-//#Preview("With location & rating") {
-//    CharterInfoSectionView(
-//        charter: Charter(
-//            title: "Reel Adventures Charter",
-//            description: "Join Captain Mike for an unforgettable deep-sea fishing experience aboard our 32-foot vessel.",
-//            location: "Key West, Florida",
-//            rating: 4.9,
-//            reviewCount: 124
-//        ),
-//        isLoading: false
-//    )
-//    .padding()
-//}

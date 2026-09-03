@@ -36,9 +36,6 @@ struct Package: Decodable, Identifiable, Hashable {
         packageType = try container.decode(String.self, forKey: .packageType)
         currency = try container.decode(String.self, forKey: .currency)
 
-        // TODO: - Review this
-        // price comes back as a quoted string ("925"), not a JSON number —
-        // convert it here so everywhere else in the app just sees a Double.
         let priceString = try container.decode(String.self, forKey: .price)
         guard let priceValue = Double(priceString) else {
             throw DecodingError.dataCorruptedError(
