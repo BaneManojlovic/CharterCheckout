@@ -10,6 +10,7 @@ import SwiftUI
 
 @Observable
 final class CheckoutViewModel {
+
     let package: Package
     let date: Date
     let groupSize: Int
@@ -28,7 +29,7 @@ final class CheckoutViewModel {
         self.groupSize = groupSize
     }
 
-    // 20% deposit — a documented assumption, the API doesn't specify one
+
     var depositAmount: Double { package.price * 0.2 }
     var remainingAmount: Double { package.price - depositAmount }
 
@@ -69,9 +70,6 @@ final class CheckoutViewModel {
 
     // MARK: - Submit
 
-    /// Returns true only on a real, valid submission. On an invalid attempt,
-    /// flips hasAttemptedSubmit so the view can reveal per-field errors,
-    /// and returns false without touching isSubmitting/bookingReference.
     func attemptSubmit() async -> Bool {
         guard isFormValid else {
             hasAttemptedSubmit = true

@@ -27,7 +27,7 @@ struct GroupSizeSheetView: View {
         VStack(spacing: 20) {
             Spacer(minLength: 8)
             HStack {
-                Text("How many people?").font(.title3.bold())
+                Text(Strings.Sheets.howManyPeople).font(.title3.bold())
                 Spacer()
                 Button { dismiss() } label: {
                     Image(systemName: "xmark").foregroundStyle(.secondary)
@@ -36,15 +36,15 @@ struct GroupSizeSheetView: View {
             .padding(.horizontal)
 
             VStack(spacing: 0) {
-                countRow(title: "Adults", subtitle: "Ages 13 or above", count: $tempAdults, minimum: 1)
+                countRow(title: Strings.Sheets.adults, subtitle: Strings.Sheets.adultsSubtitle, count: $tempAdults, minimum: 1)
                 Divider()
-                countRow(title: "Children", subtitle: "Ages 2–12", count: $tempChildren, minimum: 0)
+                countRow(title: Strings.Sheets.children, subtitle: Strings.Sheets.childrenSubtitle, count: $tempChildren, minimum: 0)
             }
             .padding(.horizontal)
 
             Spacer()
             
-            PrimaryButton(title: "Confirm") {
+            PrimaryButton(title: Strings.Sheets.confirm) {
                 adults = tempAdults
                 children = tempChildren
                 dismiss()

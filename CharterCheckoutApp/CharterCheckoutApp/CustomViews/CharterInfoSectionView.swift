@@ -43,7 +43,7 @@ struct CharterInfoSectionView: View {
                         } else {
                             Text("·")
                             Image(systemName: "star").foregroundStyle(.orange)
-                            Text(String(format: "%.1f", 0))
+                            Text(String(format: "%.1f", 0.0))
                         }
                         if let reviewCount = charter.reviewCount {
                             Text("(\(reviewCount))")

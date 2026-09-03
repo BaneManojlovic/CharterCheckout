@@ -10,7 +10,7 @@ import Combine
 
 @Observable
 class CharterInfoViewModel {
-    
+
     var charter: Charter?
     var packages: [Package] = []
     var isLoading = false
@@ -22,7 +22,6 @@ class CharterInfoViewModel {
     var photos: [CharterPhoto] = []
     var availabilityByPackageId: [String: PackageAvailability] = [:]
 
-    
     // MARK: - Methods
 
     func loadInitialData() async {
@@ -41,7 +40,7 @@ class CharterInfoViewModel {
 
             await getAvailability()
         } catch {
-            errorMessage = "Couldn't load this charter. Check your connection and try again."
+            errorMessage = Strings.Errors.couldNotLoadCharter
         }
     }
 
@@ -54,36 +53,7 @@ class CharterInfoViewModel {
             availabilityByPackageId = [:]
         }
     }
-    
-    func getCharterInfo() async {
-        isLoading = true
-        defer { isLoading = false }
-        do {
-            charter = try await APIManager.shared.getCharterInfo()
-        } catch {
-            errorMessage = "Couldn't load charter info."
-        }
-    }
-    
-    func getPackagesList() async {
-        isLoading = true
-        defer { isLoading = false }
-        do {
-            packages = try await APIManager.shared.getPackages()
-        } catch {
-            errorMessage = "Couldn't load trips."
-        }
-    }
-    
-    func getPhotos() async {
-        do {
-            photos = try await APIManager.shared.getCharterPhotos()
-                .sorted { $0.cardinal < $1.cardinal }
-        } catch {
-            errorMessage = "Couldn't load photos."
-        }
-    }
-    
+
     func isAvailable(_ package: Package) -> Bool {
         guard groupSize >= package.minPersons else { return false }
         if let max = package.maxPersons, groupSize > max { return false }
@@ -92,10 +62,10 @@ class CharterInfoViewModel {
     }
 
     func unavailabilityReason(for package: Package) -> String? {
-        if groupSize < package.minPersons { return "Min \(package.minPersons) people" }
-        if let max = package.maxPersons, groupSize > max { return "Max \(max) people" }
+        if groupSize < package.minPersons { return Strings.Charter.minPersonsReason(package.minPersons) }
+        if let max = package.maxPersons, groupSize > max { return Strings.Charter.maxPersonsReason(max) }
         if let availability = availabilityByPackageId[package.id], !availability.available {
-            return availability.reason == "shortNotice" ? "Too soon to book" : "Not available"
+            return availability.reason == "shortNotice" ? Strings.Charter.tooSoonToBook : Strings.Charter.notAvailable
         }
         return nil
     }

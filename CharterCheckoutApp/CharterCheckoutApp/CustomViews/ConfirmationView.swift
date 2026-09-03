@@ -19,10 +19,10 @@ struct ConfirmationView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 56))
                     .foregroundStyle(.green)
-                Text("Booking Confirmed!")
+                Text(Strings.Confirmation.bookingConfirmedTitle)
                     .font(.title2.bold())
                 if let reference = viewModel.bookingReference {
-                    Text("Reference: \(reference)")
+                    Text(Strings.Confirmation.referenceLabel(reference))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -32,7 +32,7 @@ struct ConfirmationView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 
-                PrimaryButton(title: "Done", action: onDone)
+                PrimaryButton(title: Strings.Confirmation.done, action: onDone)
             }
             .padding()
         }

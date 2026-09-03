@@ -14,10 +14,10 @@ struct TripSummaryCard<Content: View>: View {
     @ViewBuilder let extraContent: Content
 
     var body: some View {
-        SectionCard(title: "Your Trip") {
+        SectionCard(title: Strings.Trip.yourTrip) {
             VStack(alignment: .leading, spacing: 6) {
                 Text(package.title).font(.subheadline.bold())
-                Text("\(groupSize) guests")
+                Text(Strings.Trip.guestsCountLabel(groupSize))
                     .font(.caption).foregroundStyle(.secondary)
                 extraContent
             }

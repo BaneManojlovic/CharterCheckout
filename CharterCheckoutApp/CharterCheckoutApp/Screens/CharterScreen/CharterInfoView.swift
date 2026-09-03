@@ -18,7 +18,7 @@ struct CharterInfoView: View {
 
     private var packagesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Available trips").font(.headline)
+            Text(Strings.Charter.availableTrips).font(.headline)
             ForEach(charterInfoViewModel.packages) { package in
                 TripCellView(package: package,
                              isAvailable: charterInfoViewModel.isAvailable(package),
@@ -46,7 +46,7 @@ struct CharterInfoView: View {
                         CharterInfoSectionView(charter: charterInfoViewModel.charter,
                                                isLoading: charterInfoViewModel.isLoading)
                         SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
-                                        guestsLabel: "\(charterInfoViewModel.groupSize) persons",
+                                        guestsLabel: Strings.Charter.guestsLabel(charterInfoViewModel.groupSize),
                                         onDateTap: { showDatePicker = true },
                                         onGuestsTap: { showGroupSizePicker = true })
                         packagesSection
@@ -81,8 +81,8 @@ struct CharterInfoView: View {
             .presentationDragIndicator(.visible)
             .presentationBackground(Color(.systemBackground))
         }
-        .alert("Not yet implemented", isPresented: $showAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(Strings.Common.notYetImplementedTitle, isPresented: $showAlert) {
+            Button(Strings.Common.ok, role: .cancel) {}
         }
         .navigationDestination(item: $selectedPackageForCheckout) { package in
             CheckoutView(

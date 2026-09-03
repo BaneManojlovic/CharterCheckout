@@ -29,7 +29,7 @@ struct CheckoutView: View {
             }
             .padding()
         }
-        .navigationTitle("Checkout")
+        .navigationTitle(Strings.Checkout.title)
         .navigationDestination(isPresented: $isConfirmed) {
             ConfirmationView(viewModel: viewModel, onDone: onDismissToRoot)
         }
@@ -40,7 +40,7 @@ struct CheckoutView: View {
             Text(viewModel.date.formattedShort)
                 .font(.caption).foregroundStyle(.secondary)
             HStack {
-                Text("Total")
+                Text(Strings.Checkout.totalLabel)
                 Spacer()
                 Text(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)).font(.headline)
             }
@@ -48,32 +48,32 @@ struct CheckoutView: View {
     }
 
     private var customerDetailsSection: some View {
-        SectionCard(title: "Your Details") {
+        SectionCard(title: Strings.Checkout.yourDetails) {
             VStack(alignment: .leading, spacing: 10) {
-                TextField("First name", text: $viewModel.customer.firstName)
-                fieldError("First name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isFirstNameValid)
+                TextField(Strings.Checkout.firstNamePlaceholder, text: $viewModel.customer.firstName)
+                fieldError(Strings.Checkout.firstNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isFirstNameValid)
                 Divider()
 
-                TextField("Last name", text: $viewModel.customer.lastName)
-                fieldError("Last name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isLastNameValid)
+                TextField(Strings.Checkout.lastNamePlaceholder, text: $viewModel.customer.lastName)
+                fieldError(Strings.Checkout.lastNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isLastNameValid)
                 Divider()
 
-                TextField("Email", text: $viewModel.customer.email)
+                TextField(Strings.Checkout.emailPlaceholder, text: $viewModel.customer.email)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
-                fieldError("Enter a valid email address", show: viewModel.hasAttemptedSubmit && !viewModel.isEmailValid)
+                fieldError(Strings.Checkout.emailInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isEmailValid)
                 Divider()
 
-                TextField("Phone number", text: $viewModel.customer.phone)
+                TextField(Strings.Checkout.phonePlaceholder, text: $viewModel.customer.phone)
                     .keyboardType(.phonePad)
                     .filteringInput($viewModel.customer.phone) { InputFilter.phoneFiltered($0) }
-                fieldError("Enter a valid phone number", show: viewModel.hasAttemptedSubmit && !viewModel.isPhoneValid)
+                fieldError(Strings.Checkout.phoneInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isPhoneValid)
             }
         }
     }
 
     private var paymentOptionSection: some View {
-        SectionCard(title: "Payment Option") {
+        SectionCard(title: Strings.Checkout.paymentOption) {
             VStack(spacing: 10) {
                 ForEach(PaymentOption.allCases) { option in
                     PaymentOptionRow(
@@ -89,33 +89,33 @@ struct CheckoutView: View {
     }
 
     private var cardDetailsSection: some View {
-        SectionCard(title: "Card Details") {
+        SectionCard(title: Strings.Checkout.cardDetails) {
             VStack(alignment: .leading, spacing: 10) {
-                TextField("Card number", text: $viewModel.card.number)
+                TextField(Strings.Checkout.cardNumberPlaceholder, text: $viewModel.card.number)
                     .keyboardType(.numberPad)
                     .filteringInput($viewModel.card.number) { InputFilter.cardNumberFormatted($0) }
-                fieldError("Enter a valid card number", show: viewModel.hasAttemptedSubmit && !viewModel.isCardNumberValid)
+                fieldError(Strings.Checkout.cardNumberInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCardNumberValid)
                 Divider()
 
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        TextField("MM/YY", text: $viewModel.card.expiry)
+                        TextField(Strings.Checkout.expiryPlaceholder, text: $viewModel.card.expiry)
                             .keyboardType(.numberPad)
                             .filteringInput($viewModel.card.expiry) { InputFilter.expiryFormatted($0) }
-                        fieldError("Invalid expiry", show: viewModel.hasAttemptedSubmit && !viewModel.isExpiryValid)
+                        fieldError(Strings.Checkout.expiryInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isExpiryValid)
                     }
                     Divider()
                     VStack(alignment: .leading, spacing: 4) {
-                        TextField("CVV", text: $viewModel.card.cvv)
+                        TextField(Strings.Checkout.cvvPlaceholder, text: $viewModel.card.cvv)
                             .keyboardType(.numberPad)
                             .filteringInput($viewModel.card.cvv) { InputFilter.digitsOnly($0, maxLength: 4) }
-                        fieldError("Invalid CVV", show: viewModel.hasAttemptedSubmit && !viewModel.isCVVValid)
+                        fieldError(Strings.Checkout.cvvInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCVVValid)
                     }
                 }
                 Divider()
 
-                TextField("Cardholder name", text: $viewModel.card.cardholderName)
-                fieldError("Cardholder name is required", show: viewModel.hasAttemptedSubmit && !viewModel.isCardholderNameValid)
+                TextField(Strings.Checkout.cardholderNamePlaceholder, text: $viewModel.card.cardholderName)
+                fieldError(Strings.Checkout.cardholderNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isCardholderNameValid)
             }
         }
     }
@@ -123,12 +123,12 @@ struct CheckoutView: View {
     private var submitButton: some View {
         VStack(spacing: 8) {
             if viewModel.hasAttemptedSubmit && !viewModel.isFormValid {
-                Text("Please fix the highlighted fields above")
+                Text(Strings.Checkout.fixHighlightedFields)
                     .font(.caption)
                     .foregroundStyle(.red)
             }
             PrimaryButton(
-                title: "Confirm Booking",
+                title: Strings.Checkout.confirmBooking,
                 isLoading: viewModel.isSubmitting,
                 isDisabled: viewModel.isSubmitting
             ) {
@@ -144,9 +144,14 @@ struct CheckoutView: View {
     private func subtitle(for option: PaymentOption) -> String {
         switch option {
         case .full:
-            return "Charge \(viewModel.package.price.asCurrencyString(code: viewModel.package.currency)) today"
+            return Strings.Checkout.chargeTodayLabel(
+                viewModel.package.price.asCurrencyString(code: viewModel.package.currency)
+            )
         case .deposit:
-            return "Pay \(viewModel.depositAmount.asCurrencyString(code: viewModel.package.currency)) now, \(viewModel.remainingAmount.asCurrencyString(code: viewModel.package.currency)) due later"
+            return Strings.Checkout.depositLabel(
+                depositAmount: viewModel.depositAmount.asCurrencyString(code: viewModel.package.currency),
+                remainingAmount: viewModel.remainingAmount.asCurrencyString(code: viewModel.package.currency)
+            )
         }
     }
 

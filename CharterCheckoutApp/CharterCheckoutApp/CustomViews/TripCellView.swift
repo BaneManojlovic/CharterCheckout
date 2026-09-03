@@ -34,19 +34,19 @@ struct TripCellView: View {
             HStack(spacing: 8) {
                 Label("\(Int(package.hours)) hours", systemImage: "clock")
                 if let max = package.maxPersons {
-                    Label("up to \(max)", systemImage: "person.2")
+                    Label(Strings.Trip.upToPersonsLabel(max), systemImage: "person.2")
                 } else {
-                    Label("up to no limit", systemImage: "person.2")
+                    Label(Strings.Trip.noPersonLimit, systemImage: "person.2")
                 }
                 Spacer()
-                Text("per trip")
+                Text(Strings.Trip.perTrip)
             }
             .font(.caption)
             .foregroundStyle(Color(.systemGray))
             
             Spacer(minLength: 10)
 
-            PrimaryButton(title: isAvailable ? "Reserve" : (unavailabilityReason ?? "Unavailable"),
+            PrimaryButton(title: isAvailable ? Strings.Trip.reserve : (unavailabilityReason ?? Strings.Trip.unavailable),
                           isDisabled: !isAvailable,
                           action: onReserve)
         }

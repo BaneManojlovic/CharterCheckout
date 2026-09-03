@@ -9,7 +9,7 @@ import Foundation
 
 struct CharterPhoto: Decodable, Identifiable {
     let id: String
-    let cardinal: Int   // display order — API sends it as a string, same drill as `price`
+    let cardinal: Int
     let imageURL: String
 
     private enum CodingKeys: String, CodingKey {
