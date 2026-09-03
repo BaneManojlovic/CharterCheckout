@@ -31,6 +31,7 @@ Key decisions:
 * Real validation, not just "non-empty" — email format, phone digit count (with international + support), card length, expiry month range, CVV length, plus live input filtering so invalid characters can't be typed at all.
 * Apple Pay skipped — requires a paid Apple Developer account for a Merchant ID, a hard gate unrelated to effort, and outside what the assignment means by "payment option."
 * Two endpoints had undocumented shapes and PDF-copy typos in their URLs (charter_photos, package_availabilities) — resolved by testing directly and inspecting live responses.
+* Added CheckoutViewModelTest to demonstrate Unit testing skill's just for the CheckoutViewModel.
 
 Out of scope:
 
@@ -39,6 +40,7 @@ Card expiry-date checks,
 Full phone-format validation, 
 Offline persistence, 
 Keyboard next/previous field navigation.
+Full unit tests coverage.
 
 Setup:
 
