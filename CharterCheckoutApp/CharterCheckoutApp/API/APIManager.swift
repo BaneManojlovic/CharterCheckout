@@ -13,6 +13,7 @@ protocol APIManagerProtocol: AnyObject {
     func getCharterInfo() async throws -> Charter
     func getPackages() async throws -> [Package]
     func getCharterPhotos() async throws -> [CharterPhoto]
+    func getPackageAvailabilities(date: Date, groupSize: Int) async throws -> [String: PackageAvailability]
 }
 
 @Observable
@@ -70,6 +71,19 @@ final class APIManager: APIManagerProtocol {
             throw URLError(.badServerResponse)
         }
         let wrapper = try JSONDecoder().decode(APIResponse<[CharterPhoto]>.self, from: data)
+        return wrapper.data
+    }
+    
+    func getPackageAvailabilities(date: Date, groupSize: Int) async throws -> [String: PackageAvailability] {
+        let urlString = "https://fishingbooker.com/api/proxy/package_availabilities?charter_id=1128&trip_date=\(date.apiDateString)&group_size=\(groupSize)&booking_days=1"
+        guard let url = URL(string: urlString) else { throw URLError(.badURL) }
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        let wrapper = try JSONDecoder().decode(APIResponse<[String: PackageAvailability]>.self, from: data)
         return wrapper.data
     }
 }

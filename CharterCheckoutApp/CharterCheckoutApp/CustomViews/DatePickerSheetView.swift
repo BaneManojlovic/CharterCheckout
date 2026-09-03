@@ -21,7 +21,7 @@ struct DatePickerSheetView: View {
     var body: some View {
         VStack(spacing: 4) {
             HStack {
-                Text("Select date").font(.title3.bold())
+                Text(Strings.Sheets.selectDate).font(.title3.bold())
                 Spacer()
                 Button { dismiss() } label: {
                     Image(systemName: "xmark").foregroundStyle(.secondary)
@@ -34,7 +34,7 @@ struct DatePickerSheetView: View {
                 .datePickerStyle(.graphical)
                 .padding(.horizontal)
 
-            PrimaryButton(title: "Confirm") {
+            PrimaryButton(title: Strings.Sheets.confirm) {
                 selectedDate = tempDate
                 dismiss()
             }

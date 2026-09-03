@@ -12,4 +12,11 @@ extension Date {
     var formattedShort: String {
         formatted(.dateTime.month(.abbreviated).day())
     }
+    
+    var apiDateString: String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.timeZone = TimeZone(identifier: "UTC")
+            return formatter.string(from: self)
+    }
 }
