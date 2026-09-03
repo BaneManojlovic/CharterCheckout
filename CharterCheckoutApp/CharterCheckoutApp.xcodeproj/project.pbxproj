@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		8DE262C730498205001C8430 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DE261303045BEB5001C8430 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DE261373045BEB6001C8430;
+			remoteInfo = CharterCheckoutApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		8DE261383045BEB6001C8430 /* CharterCheckoutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharterCheckoutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DE262C330498205001C8430 /* CharterCheckoutAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CharterCheckoutAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,10 +40,22 @@
 			path = CharterCheckoutApp;
 			sourceTree = "<group>";
 		};
+		8DE262C430498205001C8430 /* CharterCheckoutAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CharterCheckoutAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8DE261353045BEB6001C8430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DE262C030498205001C8430 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				8DE2613A3045BEB6001C8430 /* CharterCheckoutApp */,
+				8DE262C430498205001C8430 /* CharterCheckoutAppTests */,
 				8DE261393045BEB6001C8430 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				8DE261383045BEB6001C8430 /* CharterCheckoutApp.app */,
+				8DE262C330498205001C8430 /* CharterCheckoutAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +108,29 @@
 			productReference = 8DE261383045BEB6001C8430 /* CharterCheckoutApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8DE262C230498205001C8430 /* CharterCheckoutAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DE262CB30498205001C8430 /* Build configuration list for PBXNativeTarget "CharterCheckoutAppTests" */;
+			buildPhases = (
+				8DE262BF30498205001C8430 /* Sources */,
+				8DE262C030498205001C8430 /* Frameworks */,
+				8DE262C130498205001C8430 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8DE262C830498205001C8430 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8DE262C430498205001C8430 /* CharterCheckoutAppTests */,
+			);
+			name = CharterCheckoutAppTests;
+			packageProductDependencies = (
+			);
+			productName = CharterCheckoutAppTests;
+			productReference = 8DE262C330498205001C8430 /* CharterCheckoutAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +143,10 @@
 				TargetAttributes = {
 					8DE261373045BEB6001C8430 = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					8DE262C230498205001C8430 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 8DE261373045BEB6001C8430;
 					};
 				};
 			};
@@ -113,12 +165,20 @@
 			projectRoot = "";
 			targets = (
 				8DE261373045BEB6001C8430 /* CharterCheckoutApp */,
+				8DE262C230498205001C8430 /* CharterCheckoutAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8DE261363045BEB6001C8430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DE262C130498205001C8430 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +195,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DE262BF30498205001C8430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8DE262C830498205001C8430 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DE261373045BEB6001C8430 /* CharterCheckoutApp */;
+			targetProxy = 8DE262C730498205001C8430 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8DE261433045BEB7001C8430 /* Debug */ = {
@@ -325,6 +400,48 @@
 			};
 			name = Release;
 		};
+		8DE262C930498205001C8430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WJRVW4JJ9W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bane.manojlovic.CharterCheckoutAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharterCheckoutApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CharterCheckoutApp";
+			};
+			name = Debug;
+		};
+		8DE262CA30498205001C8430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WJRVW4JJ9W;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bane.manojlovic.CharterCheckoutAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CharterCheckoutApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CharterCheckoutApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -342,6 +459,15 @@
 			buildConfigurations = (
 				8DE261463045BEB7001C8430 /* Debug */,
 				8DE261473045BEB7001C8430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DE262CB30498205001C8430 /* Build configuration list for PBXNativeTarget "CharterCheckoutAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE262C930498205001C8430 /* Debug */,
+				8DE262CA30498205001C8430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
