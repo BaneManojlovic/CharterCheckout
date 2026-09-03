@@ -18,11 +18,11 @@ struct SelectorRowView: View {
     var body: some View {
         HStack(spacing: 12) {
             Button(action: onDateTap) {
-                selectorLabel(icon: "calendar", title: "Date", value: dateLabel)
+                selectorLabel(icon: "calendar", title: Strings.Charter.dateSelectorLabel, value: dateLabel)
             }
             .buttonStyle(.plain)
             Button(action: onGuestsTap) {
-                selectorLabel(icon: "person.2", title: "Guests", value: guestsLabel)
+                selectorLabel(icon: "person.2", title: Strings.Charter.guestsSelectorLabel, value: guestsLabel)
             }
             .buttonStyle(.plain)
         }

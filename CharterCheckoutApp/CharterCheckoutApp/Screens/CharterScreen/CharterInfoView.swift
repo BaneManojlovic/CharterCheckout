@@ -18,9 +18,12 @@ struct CharterInfoView: View {
 
     private var packagesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Available trips").font(.headline)
+            Text(Strings.Charter.availableTrips).font(.headline)
             ForEach(charterInfoViewModel.packages) { package in
-                TripCellView(package: package) {
+                TripCellView(package: package,
+                             isAvailable: charterInfoViewModel.isAvailable(package),
+                             unavailabilityReason: charterInfoViewModel.unavailabilityReason(for: package))
+                {
                     selectedPackageForCheckout = package
                 }
             }
@@ -29,27 +32,39 @@ struct CharterInfoView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                GalleryView(onBackTap: { showAlert = true },
-                            onLikeTap: { showAlert = true })
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    CharterInfoSectionView(charter: charterInfoViewModel.charter,
-                                           isLoading: charterInfoViewModel.isLoading)
-                    SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
-                                    guestsLabel: "\(charterInfoViewModel.groupSize) persons",
-                                    onDateTap: { showDatePicker = true },
-                                    onGuestsTap: { showGroupSizePicker = true })
-                    packagesSection
+            if charterInfoViewModel.charter == nil, let errorMessage = charterInfoViewModel.errorMessage {
+                ErrorStateView(message: errorMessage) {
+                    Task { await charterInfoViewModel.loadInitialData() }
                 }
-                .padding(.horizontal)
-                .padding(.top, 16)
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    GalleryView(photos: charterInfoViewModel.photos,
+                                onBackTap: { showAlert = true },
+                                onLikeTap: { showAlert = true })
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        CharterInfoSectionView(charter: charterInfoViewModel.charter,
+                                               isLoading: charterInfoViewModel.isLoading)
+                        SelectorRowView(dateLabel: charterInfoViewModel.selectedDate.formattedShort,
+                                        guestsLabel: Strings.Charter.guestsLabel(charterInfoViewModel.groupSize),
+                                        onDateTap: { showDatePicker = true },
+                                        onGuestsTap: { showGroupSizePicker = true })
+                        packagesSection
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 16)
+                }
             }
         }
         .ignoresSafeArea(edges: .top)
         .task {
-            await charterInfoViewModel.getCharterInfo()
-            await charterInfoViewModel.getPackagesList()
+            await charterInfoViewModel.loadInitialData()
+        }
+        .onChange(of: charterInfoViewModel.selectedDate) { _, _ in
+            Task { await charterInfoViewModel.getAvailability() }
+        }
+        .onChange(of: charterInfoViewModel.groupSize) { _, _ in
+            Task { await charterInfoViewModel.getAvailability() }
         }
         .sheet(isPresented: $showDatePicker) {
             DatePickerSheetView(selectedDate: $charterInfoViewModel.selectedDate)
@@ -66,8 +81,8 @@ struct CharterInfoView: View {
             .presentationDragIndicator(.visible)
             .presentationBackground(Color(.systemBackground))
         }
-        .alert("Not yet implemented", isPresented: $showAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(Strings.Common.notYetImplementedTitle, isPresented: $showAlert) {
+            Button(Strings.Common.ok, role: .cancel) {}
         }
         .navigationDestination(item: $selectedPackageForCheckout) { package in
             CheckoutView(

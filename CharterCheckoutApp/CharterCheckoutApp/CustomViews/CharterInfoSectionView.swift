@@ -43,7 +43,7 @@ struct CharterInfoSectionView: View {
                         } else {
                             Text("·")
                             Image(systemName: "star").foregroundStyle(.orange)
-                            Text(String(format: "%.1f", 0))
+                            Text(String(format: "%.1f", 0.0))
                         }
                         if let reviewCount = charter.reviewCount {
                             Text("(\(reviewCount))")
@@ -65,17 +65,3 @@ struct CharterInfoSectionView: View {
         }
     }
 }
-
-//#Preview("With location & rating") {
-//    CharterInfoSectionView(
-//        charter: Charter(
-//            title: "Reel Adventures Charter",
-//            description: "Join Captain Mike for an unforgettable deep-sea fishing experience aboard our 32-foot vessel.",
-//            location: "Key West, Florida",
-//            rating: 4.9,
-//            reviewCount: 124
-//        ),
-//        isLoading: false
-//    )
-//    .padding()
-//}
