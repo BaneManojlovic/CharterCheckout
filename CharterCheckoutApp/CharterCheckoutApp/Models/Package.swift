@@ -45,4 +45,18 @@ struct Package: Decodable, Identifiable, Hashable {
         }
         price = priceValue
     }
+    
+    // Initialization for unit tests to construct a Package directly
+    init(id: String, title: String, description: String, price: Double, currency: String,
+         hours: Double, minPersons: Int, maxPersons: Int?, packageType: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.price = price
+        self.currency = currency
+        self.hours = hours
+        self.minPersons = minPersons
+        self.maxPersons = maxPersons
+        self.packageType = packageType
+    }
 }
