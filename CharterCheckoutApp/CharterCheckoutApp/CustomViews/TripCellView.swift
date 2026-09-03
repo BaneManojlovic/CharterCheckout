@@ -11,6 +11,8 @@ import SwiftUI
 struct TripCellView: View {
 
     let package: Package
+    let isAvailable: Bool
+    let unavailabilityReason: String?
     let onReserve: () -> Void
 
     var body: some View {
@@ -44,7 +46,9 @@ struct TripCellView: View {
             
             Spacer(minLength: 10)
 
-            PrimaryButton(title: "Reserve", action: onReserve)
+            PrimaryButton(title: isAvailable ? "Reserve" : (unavailabilityReason ?? "Unavailable"),
+                          isDisabled: !isAvailable,
+                          action: onReserve)
         }
         .padding()
         .background(

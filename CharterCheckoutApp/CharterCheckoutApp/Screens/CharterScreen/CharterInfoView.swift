@@ -20,7 +20,10 @@ struct CharterInfoView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Available trips").font(.headline)
             ForEach(charterInfoViewModel.packages) { package in
-                TripCellView(package: package) {
+                TripCellView(package: package,
+                             isAvailable: charterInfoViewModel.isAvailable(package),
+                             unavailabilityReason: charterInfoViewModel.unavailabilityReason(for: package))
+                {
                     selectedPackageForCheckout = package
                 }
             }
@@ -52,6 +55,13 @@ struct CharterInfoView: View {
             await charterInfoViewModel.getCharterInfo()
             await charterInfoViewModel.getPackagesList()
             await charterInfoViewModel.getPhotos()
+            await charterInfoViewModel.getAvailability()
+        }
+        .onChange(of: charterInfoViewModel.selectedDate) { _, _ in
+            Task { await charterInfoViewModel.getAvailability() }
+        }
+        .onChange(of: charterInfoViewModel.groupSize) { _, _ in
+            Task { await charterInfoViewModel.getAvailability() }
         }
         .sheet(isPresented: $showDatePicker) {
             DatePickerSheetView(selectedDate: $charterInfoViewModel.selectedDate)

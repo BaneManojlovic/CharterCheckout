@@ -20,6 +20,7 @@ class CharterInfoViewModel {
     var children: Int = 0
     var groupSize: Int { adults + children }
     var photos: [CharterPhoto] = []
+    var availabilityByPackageId: [String: PackageAvailability] = [:]
 
     
     // MARK: - Methods
@@ -51,5 +52,33 @@ class CharterInfoViewModel {
         } catch {
             errorMessage = "Couldn't load photos."
         }
+    }
+    
+    func getAvailability() async {
+        do {
+            availabilityByPackageId = try await APIManager.shared.getPackageAvailabilities(
+                date: selectedDate,
+                groupSize: groupSize
+            )
+        } catch {
+            errorMessage = "Couldn't load availability."
+        }
+    }
+
+    func isAvailable(_ package: Package) -> Bool {
+        guard groupSize >= package.minPersons else { return false }
+        if let max = package.maxPersons, groupSize > max { return false }
+        // no server data yet (still loading) → don't wrongly block the user
+        guard let availability = availabilityByPackageId[package.id] else { return true }
+        return availability.available
+    }
+
+    func unavailabilityReason(for package: Package) -> String? {
+        if groupSize < package.minPersons { return "Min \(package.minPersons) people" }
+        if let max = package.maxPersons, groupSize > max { return "Max \(max) people" }
+        if let availability = availabilityByPackageId[package.id], !availability.available {
+            return availability.reason == "shortNotice" ? "Too soon to book" : "Not available"
+        }
+        return nil
     }
 }
