@@ -10,7 +10,8 @@ import Foundation
 extension Date {
 
     var formattedShort: String {
-        formatted(.dateTime.month(.abbreviated).day())
+        formatted(.dateTime.month(.abbreviated).day()
+            .locale(Locale(identifier: "en_US")))
     }
     
     var apiDateString: String {

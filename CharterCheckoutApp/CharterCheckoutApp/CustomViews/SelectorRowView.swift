@@ -38,7 +38,6 @@ struct SelectorRowView: View {
                     .foregroundStyle(Color(.systemGray2))
                 Text(value)
                     .font(.subheadline)
-                    .foregroundStyle(Color(.black))
             }
             Spacer()
             Image(systemName: "chevron.down")
