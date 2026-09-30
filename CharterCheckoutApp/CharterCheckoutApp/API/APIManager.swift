@@ -19,14 +19,11 @@ protocol APIManagerProtocol: AnyObject {
 @Observable
 final class APIManager: APIManagerProtocol {
     
-    var isLoading = false
-    
     static let shared = APIManager()
     
     private init() {}
     
     func getCharterInfo() async throws -> Charter {
-        isLoading = true
         
         guard let url = URL(string: "https://fishingbooker.com/api/proxy/charters/1128?fields=title,description") else {
             throw URLError(.badURL)
@@ -44,7 +41,6 @@ final class APIManager: APIManagerProtocol {
     }
     
     func getPackages() async throws -> [Package] {
-        isLoading = true
         
         guard let url = URL(string: "https://fishingbooker.com/api/proxy/packages?charter_id=1128&fields=id,price,min_persons,max_persons,hours,currency,title,description,package_type") else {
             throw URLError(.badURL)
