@@ -74,4 +74,16 @@ struct CheckoutViewModelTests {
         vm.card.cardholderName = "Jane Doe"
         #expect(vm.isFormValid)
     }
+    
+    @Test func expiredCardFails() {
+        let vm = makeViewModel()
+        vm.card.expiry = "01/20"
+        #expect(!vm.isExpiryValid)
+    }
+
+    @Test func futureExpiryPasses() {
+        let vm = makeViewModel()
+        vm.card.expiry = "12/30"
+        #expect(vm.isExpiryValid)
+    }
 }
