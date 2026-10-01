@@ -19,16 +19,12 @@ protocol APIManagerProtocol: AnyObject {
 @Observable
 final class APIManager: APIManagerProtocol {
     
-    var isLoading = false
-    
     static let shared = APIManager()
     
     private init() {}
     
-    func getCharterInfo() async throws -> Charter {
-        isLoading = true
-        
-        guard let url = URL(string: "https://fishingbooker.com/api/proxy/charters/1128?fields=title,description") else {
+    private func fetch<T: Decodable>(_ endpoint: APIEndpoint) async throws -> T {
+        guard let url = endpoint.url else {
             throw URLError(.badURL)
         }
         
@@ -39,51 +35,24 @@ final class APIManager: APIManagerProtocol {
             throw URLError(.badServerResponse)
         }
         
-        let wrapper = try JSONDecoder().decode(APIResponse<Charter>.self, from: data)
+        let wrapper = try JSONDecoder().decode(APIResponse<T>.self, from: data)
         return wrapper.data
+    }
+    
+    
+    func getCharterInfo() async throws -> Charter {
+        try await fetch(.charterInfo)
     }
     
     func getPackages() async throws -> [Package] {
-        isLoading = true
-        
-        guard let url = URL(string: "https://fishingbooker.com/api/proxy/packages?charter_id=1128&fields=id,price,min_persons,max_persons,hours,currency,title,description,package_type") else {
-            throw URLError(.badURL)
-        }
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let http = response as? HTTPURLResponse,
-              (200..<300).contains(http.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let wrapper = try JSONDecoder().decode(APIResponse<[Package]>.self, from: data)
-        
-        return wrapper.data
+        try await fetch(.packages)
     }
     
     func getCharterPhotos() async throws -> [CharterPhoto] {
-        guard let url = URL(string: "https://fishingbooker.com/api/proxy/charter_photos?charter_id=1128") else {
-            throw URLError(.badURL)
-        }
-        let (data, response) = try await URLSession.shared.data(from: url)
-        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-        let wrapper = try JSONDecoder().decode(APIResponse<[CharterPhoto]>.self, from: data)
-        return wrapper.data
+        try await fetch(.charterPhotos)
     }
     
-    func getPackageAvailabilities(date: Date, groupSize: Int) async throws -> [String: PackageAvailability] {
-        let urlString = "https://fishingbooker.com/api/proxy/package_availabilities?charter_id=1128&trip_date=\(date.apiDateString)&group_size=\(groupSize)&booking_days=1"
-        guard let url = URL(string: urlString) else { throw URLError(.badURL) }
-
-        let (data, response) = try await URLSession.shared.data(from: url)
-        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-
-        let wrapper = try JSONDecoder().decode(APIResponse<[String: PackageAvailability]>.self, from: data)
-        return wrapper.data
+    func getPackageAvailabilities(date: Date, groupSize: Int) async throws -> [String : PackageAvailability] {
+        try await fetch(.packageAvailabilites(date: date, groupSize: groupSize))
     }
 }

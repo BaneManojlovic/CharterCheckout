@@ -10,6 +10,8 @@ import Combine
 
 @Observable
 class CharterInfoViewModel {
+    
+    private let apiManager: APIManagerProtocol
 
     var charter: Charter?
     var packages: [Package] = []
@@ -21,6 +23,12 @@ class CharterInfoViewModel {
     var groupSize: Int { adults + children }
     var photos: [CharterPhoto] = []
     var availabilityByPackageId: [String: PackageAvailability] = [:]
+    
+    // MARK: - Initialization
+
+    init(apiManager: APIManagerProtocol = APIManager.shared) {
+        self.apiManager = apiManager
+    }
 
     // MARK: - Methods
 
@@ -30,9 +38,9 @@ class CharterInfoViewModel {
         defer { isLoading = false }
 
         do {
-            async let charterResult = APIManager.shared.getCharterInfo()
-            async let packagesResult = APIManager.shared.getPackages()
-            async let photosResult = APIManager.shared.getCharterPhotos()
+            async let charterResult = apiManager.getCharterInfo()
+            async let packagesResult = apiManager.getPackages()
+            async let photosResult = apiManager.getCharterPhotos()
 
             charter = try await charterResult
             packages = try await packagesResult
@@ -46,7 +54,7 @@ class CharterInfoViewModel {
 
     func getAvailability() async {
         do {
-            availabilityByPackageId = try await APIManager.shared.getPackageAvailabilities(
+            availabilityByPackageId = try await apiManager.getPackageAvailabilities(
                 date: selectedDate, groupSize: groupSize
             )
         } catch {
