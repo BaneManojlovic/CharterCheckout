@@ -13,11 +13,7 @@ import Foundation
 struct CheckoutViewModelTests {
 
     private func makeViewModel() -> CheckoutViewModel {
-        let package = Package(
-            id: "1", title: "Test Trip", description: "desc",
-            price: 500, currency: "USD", hours: 4,
-            minPersons: 1, maxPersons: 4, packageType: "D"
-        )
+        let package = makePackage(price: 500)
         return CheckoutViewModel(package: package, date: Date(), groupSize: 2)
     }
 
