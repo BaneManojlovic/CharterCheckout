@@ -52,8 +52,27 @@ final class CheckoutViewModel {
 
     var isExpiryValid: Bool {
         let parts = card.expiry.split(separator: "/")
-        guard parts.count == 2, let month = Int(parts[0]), (1...12).contains(month) else { return false }
-        return parts[1].count == 2
+        guard parts.count == 2,
+              let month = Int(parts[0]), (1...12).contains(month),
+              parts[1].count == 2,
+              let twoDigitYear = Int(parts[1]) else {
+            return false
+        }
+
+        let calendar = Calendar(identifier: .gregorian)
+        var components = DateComponents()
+        components.year = 2000 + twoDigitYear
+        components.month = month
+        components.day = 1
+
+        guard let firstDayOfExpiryMonth = calendar.date(from: components),
+              let firstDayOfNextMonth = calendar.date(byAdding: .month, value: 1, to: firstDayOfExpiryMonth) else {
+            return false
+        }
+
+        // Kartica važi do kraja meseca upisanog na njoj — pa je validna
+        // dokle god je danas pre prvog dana SLEDEĆEG meseca.
+        return Date() < firstDayOfNextMonth
     }
 
     var isCVVValid: Bool {

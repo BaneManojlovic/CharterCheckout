@@ -13,11 +13,7 @@ import Foundation
 struct CheckoutViewModelTests {
 
     private func makeViewModel() -> CheckoutViewModel {
-        let package = Package(
-            id: "1", title: "Test Trip", description: "desc",
-            price: 500, currency: "USD", hours: 4,
-            minPersons: 1, maxPersons: 4, packageType: "D"
-        )
+        let package = makePackage(price: 500)
         return CheckoutViewModel(package: package, date: Date(), groupSize: 2)
     }
 
@@ -73,5 +69,17 @@ struct CheckoutViewModelTests {
         vm.card.cvv = "123"
         vm.card.cardholderName = "Jane Doe"
         #expect(vm.isFormValid)
+    }
+    
+    @Test func expiredCardFails() {
+        let vm = makeViewModel()
+        vm.card.expiry = "01/20"
+        #expect(!vm.isExpiryValid)
+    }
+
+    @Test func futureExpiryPasses() {
+        let vm = makeViewModel()
+        vm.card.expiry = "12/30"
+        #expect(vm.isExpiryValid)
     }
 }
