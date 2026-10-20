@@ -5,9 +5,10 @@
   "description": "Appium + Cucumber.js (Gherkin BDD) end-to-end test automation for CharterCheckoutApp (iOS native, SwiftUI)",
   "scripts": {
     "appium": "appium",
-    "test": "cucumber-js --config cucumber.js",
+    "reports:dir": "node -e \"require('fs').mkdirSync('reports', { recursive: true })\"",
+    "test": "npm run reports:dir && cucumber-js --config cucumber.js",
     "test:tag": "cucumber-js --config cucumber.js --tags",
-    "test:checkout-success": "cucumber-js --config cucumber.js --tags @checkout-success",
+    "test:checkout-success": "npm run reports:dir && cucumber-js --config cucumber.js --tags @checkout-success",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
