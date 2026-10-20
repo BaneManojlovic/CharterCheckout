@@ -48,6 +48,7 @@ struct TripCellView: View {
 
             PrimaryButton(title: isAvailable ? Strings.Trip.reserve : (unavailabilityReason ?? Strings.Trip.unavailable),
                           isDisabled: !isAvailable,
+                          identifier: "reserve_button_\(package.id)",
                           action: onReserve)
         }
         .padding()
@@ -59,5 +60,6 @@ struct TripCellView: View {
             RoundedRectangle(cornerRadius: 14)
                 .stroke(Color(.systemGray2), lineWidth: 1)
         )
+        .accessibilityIdentifier("trip_cell_\(package.id)")
     }
 }

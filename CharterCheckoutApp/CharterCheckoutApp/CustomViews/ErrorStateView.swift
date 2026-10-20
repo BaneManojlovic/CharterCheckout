@@ -21,7 +21,7 @@ struct ErrorStateView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-            PrimaryButton(title: Strings.Errors.retry, action: onRetry)
+            PrimaryButton(title: Strings.Errors.retry, identifier: "retry_button", action: onRetry)
                 .frame(maxWidth: 200)
         }
         .padding()

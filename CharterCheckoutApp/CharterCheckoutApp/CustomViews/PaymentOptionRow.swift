@@ -29,5 +29,6 @@ struct PaymentOptionRow: View {
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(.separator)))
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("payment_option_\(option.rawValue)_row")
     }
 }

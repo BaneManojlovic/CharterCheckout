@@ -43,12 +43,14 @@ struct GalleryView: View {
                         .padding(10)
                         .background(.white.opacity(0.9), in: Circle())
                 }
+                .accessibilityIdentifier("gallery_back_button")
                 Spacer()
                 Button(action: onLikeTap) {
                     Image(systemName: "heart")
                         .padding(10)
                         .background(.white.opacity(0.9), in: Circle())
                 }
+                .accessibilityIdentifier("gallery_like_button")
             }
             .padding()
             .padding(.top, 40)

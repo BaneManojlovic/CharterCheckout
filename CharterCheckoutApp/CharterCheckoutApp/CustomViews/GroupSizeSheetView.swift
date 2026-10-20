@@ -32,19 +32,20 @@ struct GroupSizeSheetView: View {
                 Button { dismiss() } label: {
                     Image(systemName: "xmark").foregroundStyle(.secondary)
                 }
+                .accessibilityIdentifier("group_size_close_button")
             }
             .padding(.horizontal)
 
             VStack(spacing: 0) {
-                countRow(title: Strings.Sheets.adults, subtitle: Strings.Sheets.adultsSubtitle, count: $tempAdults, minimum: 1)
+                countRow(title: Strings.Sheets.adults, subtitle: Strings.Sheets.adultsSubtitle, count: $tempAdults, minimum: 1, identifierPrefix: "adults")
                 Divider()
-                countRow(title: Strings.Sheets.children, subtitle: Strings.Sheets.childrenSubtitle, count: $tempChildren, minimum: 0)
+                countRow(title: Strings.Sheets.children, subtitle: Strings.Sheets.childrenSubtitle, count: $tempChildren, minimum: 0, identifierPrefix: "children")
             }
             .padding(.horizontal)
 
             Spacer()
-            
-            PrimaryButton(title: Strings.Sheets.confirm) {
+
+            PrimaryButton(title: Strings.Sheets.confirm, identifier: "group_size_confirm_button") {
                 adults = tempAdults
                 children = tempChildren
                 dismiss()
@@ -55,7 +56,7 @@ struct GroupSizeSheetView: View {
         .padding(.bottom, 4)
     }
 
-    private func countRow(title: String, subtitle: String, count: Binding<Int>, minimum: Int) -> some View {
+    private func countRow(title: String, subtitle: String, count: Binding<Int>, minimum: Int, identifierPrefix: String) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(.body.weight(.semibold))
@@ -70,6 +71,7 @@ struct GroupSizeSheetView: View {
             .buttonStyle(.bordered)
             .buttonBorderShape(.circle)
             .disabled(count.wrappedValue <= minimum)
+            .accessibilityIdentifier("\(identifierPrefix)_decrement_button")
 
             Text("\(count.wrappedValue)").frame(minWidth: 24)
 
@@ -80,6 +82,7 @@ struct GroupSizeSheetView: View {
             }
             .buttonStyle(.bordered)
             .buttonBorderShape(.circle)
+            .accessibilityIdentifier("\(identifierPrefix)_increment_button")
         }
         .padding(.vertical, 12)
     }

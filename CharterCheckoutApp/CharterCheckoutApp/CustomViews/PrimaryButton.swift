@@ -12,6 +12,7 @@ struct PrimaryButton: View {
     let title: String
     var isLoading: Bool = false
     var isDisabled: Bool = false
+    let identifier: String
     let action: () -> Void
 
     var body: some View {
@@ -29,5 +30,6 @@ struct PrimaryButton: View {
         .buttonBorderShape(.roundedRectangle(radius: 12))
         .controlSize(.large)
         .disabled(isDisabled || isLoading)
+        .accessibilityIdentifier(identifier)
     }
 }

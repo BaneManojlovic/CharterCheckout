@@ -21,10 +21,12 @@ struct SelectorRowView: View {
                 selectorLabel(icon: "calendar", title: Strings.Charter.dateSelectorLabel, value: dateLabel)
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier("date_selector_button")
             Button(action: onGuestsTap) {
                 selectorLabel(icon: "person.2", title: Strings.Charter.guestsSelectorLabel, value: guestsLabel)
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier("guests_selector_button")
         }
     }
 

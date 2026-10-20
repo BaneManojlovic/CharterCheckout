@@ -26,6 +26,7 @@ struct DatePickerSheetView: View {
                 Button { dismiss() } label: {
                     Image(systemName: "xmark").foregroundStyle(.secondary)
                 }
+                .accessibilityIdentifier("date_picker_close_button")
             }
             .padding(.horizontal)
             .padding(.top, 32)
@@ -33,8 +34,9 @@ struct DatePickerSheetView: View {
             DatePicker("", selection: $tempDate, in: Date()..., displayedComponents: .date)
                 .datePickerStyle(.graphical)
                 .padding(.horizontal)
+                .accessibilityIdentifier("date_picker")
 
-            PrimaryButton(title: Strings.Sheets.confirm) {
+            PrimaryButton(title: Strings.Sheets.confirm, identifier: "date_picker_confirm_button") {
                 selectedDate = tempDate
                 dismiss()
             }

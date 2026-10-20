@@ -32,7 +32,7 @@ struct ConfirmationView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 
-                PrimaryButton(title: Strings.Confirmation.done, action: onDone)
+                PrimaryButton(title: Strings.Confirmation.done, identifier: "done_button", action: onDone)
             }
             .padding()
         }
