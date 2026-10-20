@@ -1,0 +1,16 @@
+{
+  "source": "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Screens/CheckoutScreen/CheckoutView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 49
+        }
+      }
+    ]
+  },
+  "version": 1
+}

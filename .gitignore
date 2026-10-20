@@ -63,3 +63,9 @@ fastlane/test_output
 
 # macOS
 .DS_Store
+
+# Node / test automation (Appium + Cucumber.js)
+node_modules/
+dist/
+npm-debug.log*
+.tsbuildinfo

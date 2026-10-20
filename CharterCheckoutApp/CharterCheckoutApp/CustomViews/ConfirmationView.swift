@@ -19,12 +19,15 @@ struct ConfirmationView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 56))
                     .foregroundStyle(.green)
+                    .accessibilityIdentifier("confirmation_success_icon")
                 Text(Strings.Confirmation.bookingConfirmedTitle)
                     .font(.title2.bold())
+                    .accessibilityIdentifier("confirmation_title")
                 if let reference = viewModel.bookingReference {
                     Text(Strings.Confirmation.referenceLabel(reference))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                        .accessibilityIdentifier("booking_reference_label")
                 }
                 
                 TripSummaryCard(package: viewModel.package, groupSize: viewModel.groupSize) {

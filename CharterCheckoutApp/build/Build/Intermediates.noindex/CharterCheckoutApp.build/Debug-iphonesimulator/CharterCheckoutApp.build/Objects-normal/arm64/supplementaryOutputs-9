@@ -1,0 +1,30 @@
+{
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/TripSummaryCard.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/TripSummaryCard.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/TripSummaryCard.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/TripSummaryCard.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/TripSummaryCard.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/TripSummaryCard.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Extensions/Date+Extension.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Date+Extension.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Date+Extension.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Date+Extension.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Date+Extension.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Date+Extension.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Extensions/Double+Extension.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Double+Extension.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Double+Extension.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Double+Extension.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Double+Extension.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/Double+Extension.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Extensions/View+Extension.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/View+Extension.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/View+Extension.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/View+Extension.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/View+Extension.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/View+Extension.swiftdeps"
+  }
+}

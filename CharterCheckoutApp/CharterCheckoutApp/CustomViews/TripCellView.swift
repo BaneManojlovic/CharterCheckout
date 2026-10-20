@@ -60,6 +60,10 @@ struct TripCellView: View {
             RoundedRectangle(cornerRadius: 14)
                 .stroke(Color(.systemGray2), lineWidth: 1)
         )
+        // Without .contain, SwiftUI collapses this VStack and its PrimaryButton into a
+        // single merged accessibility element and the identifier set here wins over the
+        // button's own "reserve_button_<id>" — silently making the button unqueryable.
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("trip_cell_\(package.id)")
     }
 }

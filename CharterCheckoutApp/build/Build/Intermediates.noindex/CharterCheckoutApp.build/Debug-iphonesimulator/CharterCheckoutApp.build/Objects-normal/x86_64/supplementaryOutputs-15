@@ -1,0 +1,23 @@
+{
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Models/PackageAvailability.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/PackageAvailability.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/PackageAvailability.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/PackageAvailability.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/PackageAvailability.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/PackageAvailability.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Screens/CharterScreen/CharterInfoView.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoView.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoView.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoView.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoView.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoView.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/Screens/CharterScreen/CharterInfoViewModel.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoViewModel.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoViewModel.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoViewModel.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoViewModel.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/x86_64/CharterInfoViewModel.swiftdeps"
+  }
+}

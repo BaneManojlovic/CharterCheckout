@@ -1,0 +1,30 @@
+{
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/ErrorStateView.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/ErrorStateView.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/ErrorStateView.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/ErrorStateView.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/ErrorStateView.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/ErrorStateView.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/GalleryView.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GalleryView.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GalleryView.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GalleryView.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GalleryView.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GalleryView.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/GroupSizeSheetView.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GroupSizeSheetView.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GroupSizeSheetView.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GroupSizeSheetView.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GroupSizeSheetView.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/GroupSizeSheetView.swiftdeps"
+  },
+  "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/PaymentOptionRow.swift" : {
+    "const-values" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/PaymentOptionRow.swiftconstvalues",
+    "dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/PaymentOptionRow.d",
+    "diagnostics" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/PaymentOptionRow.dia",
+    "object" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/PaymentOptionRow.o",
+    "swift-dependencies" : "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/build/Build/Intermediates.noindex/CharterCheckoutApp.build/Debug-iphonesimulator/CharterCheckoutApp.build/Objects-normal/arm64/PaymentOptionRow.swiftdeps"
+  }
+}

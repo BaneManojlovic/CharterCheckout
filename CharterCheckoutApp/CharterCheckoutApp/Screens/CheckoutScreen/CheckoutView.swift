@@ -70,13 +70,13 @@ struct CheckoutView: View {
                 TextField(Strings.Checkout.firstNamePlaceholder, text: $viewModel.customer.firstName)
                     .focused($focusedField, equals: .firstName)
                     .accessibilityIdentifier("first_name_input")
-                fieldError(Strings.Checkout.firstNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isFirstNameValid)
+                fieldError(Strings.Checkout.firstNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isFirstNameValid, identifier: "first_name_error")
                 Divider()
 
                 TextField(Strings.Checkout.lastNamePlaceholder, text: $viewModel.customer.lastName)
                     .focused($focusedField, equals: .lastName)
                     .accessibilityIdentifier("last_name_input")
-                fieldError(Strings.Checkout.lastNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isLastNameValid)
+                fieldError(Strings.Checkout.lastNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isLastNameValid, identifier: "last_name_error")
                 Divider()
 
                 TextField(Strings.Checkout.emailPlaceholder, text: $viewModel.customer.email)
@@ -84,7 +84,7 @@ struct CheckoutView: View {
                     .textInputAutocapitalization(.never)
                     .focused($focusedField, equals: .email)
                     .accessibilityIdentifier("email_input")
-                fieldError(Strings.Checkout.emailInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isEmailValid)
+                fieldError(Strings.Checkout.emailInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isEmailValid, identifier: "email_error")
                 Divider()
 
                 TextField(Strings.Checkout.phonePlaceholder, text: $viewModel.customer.phone)
@@ -92,7 +92,7 @@ struct CheckoutView: View {
                     .filteringInput($viewModel.customer.phone) { InputFilter.phoneFiltered($0) }
                     .focused($focusedField, equals: .phone)
                     .accessibilityIdentifier("phone_input")
-                fieldError(Strings.Checkout.phoneInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isPhoneValid)
+                fieldError(Strings.Checkout.phoneInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isPhoneValid, identifier: "phone_error")
             }
         }
     }
@@ -121,7 +121,7 @@ struct CheckoutView: View {
                     .filteringInput($viewModel.card.number) { InputFilter.cardNumberFormatted($0) }
                     .focused($focusedField, equals: .cardNumber)
                     .accessibilityIdentifier("card_number_input")
-                fieldError(Strings.Checkout.cardNumberInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCardNumberValid)
+                fieldError(Strings.Checkout.cardNumberInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCardNumberValid, identifier: "card_number_error")
                 Divider()
 
                 HStack(alignment: .top) {
@@ -131,7 +131,7 @@ struct CheckoutView: View {
                             .filteringInput($viewModel.card.expiry) { InputFilter.expiryFormatted($0) }
                             .focused($focusedField, equals: .expiry)
                             .accessibilityIdentifier("expiry_input")
-                        fieldError(Strings.Checkout.expiryInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isExpiryValid)
+                        fieldError(Strings.Checkout.expiryInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isExpiryValid, identifier: "expiry_error")
                     }
                     Divider()
                     VStack(alignment: .leading, spacing: 4) {
@@ -140,7 +140,7 @@ struct CheckoutView: View {
                             .filteringInput($viewModel.card.cvv) { InputFilter.digitsOnly($0, maxLength: 4) }
                             .focused($focusedField, equals: .cvv)
                             .accessibilityIdentifier("cvv_input")
-                        fieldError(Strings.Checkout.cvvInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCVVValid)
+                        fieldError(Strings.Checkout.cvvInvalid, show: viewModel.hasAttemptedSubmit && !viewModel.isCVVValid, identifier: "cvv_error")
                     }
                 }
                 Divider()
@@ -148,7 +148,7 @@ struct CheckoutView: View {
                 TextField(Strings.Checkout.cardholderNamePlaceholder, text: $viewModel.card.cardholderName)
                     .focused($focusedField, equals: .cardholderName)
                     .accessibilityIdentifier("cardholder_name_input")
-                fieldError(Strings.Checkout.cardholderNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isCardholderNameValid)
+                fieldError(Strings.Checkout.cardholderNameRequired, show: viewModel.hasAttemptedSubmit && !viewModel.isCardholderNameValid, identifier: "cardholder_name_error")
             }
         }
     }
@@ -159,6 +159,7 @@ struct CheckoutView: View {
                 Text(Strings.Checkout.fixHighlightedFields)
                     .font(.caption)
                     .foregroundStyle(.red)
+                    .accessibilityIdentifier("form_error_message")
             }
             PrimaryButton(
                 title: Strings.Checkout.confirmBooking,
@@ -190,9 +191,12 @@ struct CheckoutView: View {
     }
 
     @ViewBuilder
-    private func fieldError(_ message: String, show: Bool) -> some View {
+    private func fieldError(_ message: String, show: Bool, identifier: String) -> some View {
         if show {
-            Text(message).font(.caption2).foregroundStyle(.red)
+            Text(message)
+                .font(.caption2)
+                .foregroundStyle(.red)
+                .accessibilityIdentifier(identifier)
         }
     }
 

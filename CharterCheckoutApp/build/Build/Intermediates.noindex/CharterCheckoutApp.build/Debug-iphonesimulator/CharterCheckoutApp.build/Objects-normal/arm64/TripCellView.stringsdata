@@ -1,0 +1,16 @@
+{
+  "source": "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/TripCellView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld hours",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 35
+        }
+      }
+    ]
+  },
+  "version": 1
+}
