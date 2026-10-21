@@ -1,5 +1,16 @@
 {
   "source": "/Users/branislavmanojlovic/Desktop/CharterCheckout/CharterCheckoutApp/CharterCheckoutApp/CustomViews/GalleryView.swift",
-  "tables": {},
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Photo %lld of %lld",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 38
+        }
+      }
+    ]
+  },
   "version": 1
 }

@@ -9,7 +9,16 @@ import Foundation
 
 enum APIEndpoint {
     
-    static let baseURL = "https://fishingbooker.com/api/proxy"
+    static let baseURL: String = {
+        #if DEBUG
+        // UI tests can point the app at another server (e.g. an unreachable one
+        // to force the network error state) via the API_BASE_URL launch env var.
+        if let override = ProcessInfo.processInfo.environment["API_BASE_URL"], !override.isEmpty {
+            return override
+        }
+        #endif
+        return "https://fishingbooker.com/api/proxy"
+    }()
     static let charterId = 1128
     
     case charterInfo

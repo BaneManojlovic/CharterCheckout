@@ -12,3 +12,7 @@
 ## UI Element Selection Rules
 - All SwiftUI Views must have explicit `.accessibilityIdentifier("id_name")` modifiers.
 - The automation tests must look for elements using `by.accessibilityId()` or the `~` prefix.
+
+## Specialized Feature Testing
+- Before writing, editing, or modifying tests for a specific feature, check if a matching feature instruction sheet exists under the `tests/skills/` directory.
+- If a skill sheet is present, read its context constraints and prioritize those definitions over generic layouts.

@@ -1,48 +1,24 @@
 import assert from 'node:assert/strict';
-import { Before, After, Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
-import { createIOSDriver } from '../../wdio.conf';
-
-// Appium session startup can take well beyond Cucumber's 5s default step timeout.
-setDefaultTimeout(60 * 1000);
-
-/**
- * Several step texts in booking.feature contain parentheses and quotes
- * (e.g. `(if any)`, `("Full payment" or "Deposit")`). Cucumber Expressions treat
- * `()` as "optional text" syntax, which misparses those literal strings. Matching
- * with an escaped RegExp instead sidesteps that entirely and guarantees an exact,
- * literal match against the feature file text.
- */
-function exactly(stepText: string): RegExp {
-  const escaped = stepText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`^${escaped}$`);
-}
+import { Before, Given, When, Then } from '@cucumber/cucumber';
+import { browser, byId, exactly } from '../support/driver';
 
 interface ScenarioContext {
   selectedReserveButton?: WebdriverIO.Element;
 }
 
-let browser: WebdriverIO.Browser;
 let context: ScenarioContext = {};
 
 // ---------------------------------------------------------------------------
-// Hooks
+// Hooks (the Appium session itself is managed in features/support/driver.ts)
 // ---------------------------------------------------------------------------
 
 Before(async function () {
-  browser = await createIOSDriver();
   context = {};
-});
-
-After(async function () {
-  await browser?.deleteSession();
 });
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-/** Shorthand for the `~identifier` accessibility-id selector strategy. */
-const byId = (identifier: string) => browser.$(`~${identifier}`);
 
 /**
  * Finds trip cells / reserve buttons by accessibility-id prefix using an
@@ -81,6 +57,42 @@ async function selectDateOffset(daysFromToday: number) {
 }
 
 /**
+ * Selects the nearest future date that has at least one reservable package and
+ * returns that date's enabled reserve buttons. The live charter calendar changes
+ * day to day (dates get blocked or booked), so a fixed offset is not reliable.
+ * Starts at +2 days because same-day/next-day packages are "too soon to book".
+ */
+async function selectFirstBookableDate(maxOffset = 10) {
+  for (let offset = 2; offset <= maxOffset; offset++) {
+    await byId('date_selector_button').click();
+    await byId('date_picker').waitForDisplayed({ timeout: 10000 });
+    const day = byId(futureDateLabel(offset));
+    if (!(await day.isExisting())) {
+      // Date is on a later month page of the picker; stop searching here.
+      await byId('date_picker_confirm_button').click();
+      break;
+    }
+    await day.click();
+    await byId('date_picker_confirm_button').click();
+    await byId('date_picker').waitForDisplayed({ reverse: true, timeout: 10000 });
+
+    // Availability for the new date loads asynchronously; give it a moment.
+    let available: WebdriverIO.Element[] = [];
+    await browser
+      .waitUntil(async () => (available = [...(await reserveButtonsByState(true))]).length > 0, {
+        timeout: 5000,
+        interval: 500,
+      })
+      .catch(() => undefined);
+    if (available.length > 0) {
+      console.log(`[diag] bookable date found at +${offset} days`);
+      return available;
+    }
+  }
+  return [];
+}
+
+/**
  * Reserves the first available package from CharterScreen and waits for CheckoutScreen.
  * The app's booking API flags same-day packages "too soon to book" (see
  * CharterInfoViewModel.unavailabilityReason), so every package is disabled on the
@@ -98,9 +110,7 @@ async function navigateToCheckoutScreen() {
   const t0 = Date.now();
   await byId('date_selector_button').waitForDisplayed({ timeout: 15000 });
   console.log(`[diag] date_selector_button displayed at +${Date.now() - t0}ms`);
-  await selectDateOffset(2);
-  console.log(`[diag] date offset selected at +${Date.now() - t0}ms`);
-  const available = await reserveButtonsByState(true);
+  const available = await selectFirstBookableDate();
   console.log(`[diag] available buttons found: ${available.length} at +${Date.now() - t0}ms`);
   assert.ok(available.length > 0, 'Expected at least one available (enabled) reserve button');
   const name = await available[0].getAttribute('name');
@@ -122,6 +132,10 @@ async function navigateToCheckoutScreen() {
     throw err;
   }
 }
+
+const APP_BUNDLE_ID = 'com.bane.manojlovic.CharterCheckoutApp';
+/** Port 9 (discard) is closed on the host, so connections are refused immediately. */
+const UNREACHABLE_API_BASE_URL = 'http://127.0.0.1:9';
 
 const CARD_NUMBER = '4242424242424242';
 const EXPIRY = '1230';
@@ -275,8 +289,7 @@ Given(
     // "Today" is flagged too-soon-to-book for every package, so a couple of days
     // out is always selected (see navigateToCheckoutScreen for why querying
     // immediately on load instead is unreliable).
-    await selectDateOffset(2);
-    const available = await reserveButtonsByState(true);
+    const available = await selectFirstBookableDate();
     assert.ok(available.length > 0, 'Expected at least one available (enabled) reserve button');
     context.selectedReserveButton = available[0];
   }
@@ -325,9 +338,15 @@ Then(exactly('tapping it does not navigate to the CheckoutScreen'), async functi
 });
 
 Given(exactly('the charter data request fails'), async function () {
-  // TODO: requires network-level fault injection (e.g. proxying APIManager's base URL,
-  // or toggling simulator connectivity) to force this deterministically. Left as a
-  // manual precondition until that harness exists.
+  // Appium can't take an iOS Simulator offline (it shares the Mac's network), so the
+  // app is relaunched with its DEBUG-only API_BASE_URL override pointed at a closed
+  // local port. Every request then fails with a real connection error, driving
+  // CharterInfoViewModel into its error state and rendering ErrorStateView.
+  await browser.execute('mobile: terminateApp', { bundleId: APP_BUNDLE_ID });
+  await browser.execute('mobile: launchApp', {
+    bundleId: APP_BUNDLE_ID,
+    environment: { API_BASE_URL: UNREACHABLE_API_BASE_URL },
+  });
 });
 
 Then(exactly('an error state is displayed with an error message'), async function () {
@@ -536,7 +555,9 @@ Then(exactly('an inline error is shown under the card number field'), async func
 Then(
   exactly('a general "fix highlighted fields" message is shown near the submit button'),
   async function () {
-    assert.ok(await byId('form_error_message').isDisplayed());
+    // Rendered only after a failed submit, but sits at the bottom of the scrolling form
+    // (often off-screen), so presence rather than on-screen visibility is asserted.
+    await byId('form_error_message').waitForExist({ timeout: 5000 });
   }
 );
 
@@ -597,7 +618,9 @@ Then(exactly('inline errors are shown under each of the invalid card fields'), a
 });
 
 Then(exactly('the "fix highlighted fields" message is shown'), async function () {
-  assert.ok(await byId('form_error_message').isDisplayed());
+  // Rendered only after a failed submit, but sits at the bottom of the scrolling form
+  // (often off-screen), so presence rather than on-screen visibility is asserted.
+  await byId('form_error_message').waitForExist({ timeout: 5000 });
 });
 
 Given(exactly('the user has attempted to submit with an invalid card number'), async function () {

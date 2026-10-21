@@ -6,6 +6,48 @@
 	<integer>12</integer>
 	<key>logs</key>
 	<dict>
+		<key>7CDA6E50-68DD-4B2B-8DCB-DA12557FE596</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7CDA6E50-68DD-4B2B-8DCB-DA12557FE596.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>CharterCheckoutApp project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CharterCheckoutApp</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project CharterCheckoutApp with scheme CharterCheckoutApp and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>814259778.37869406</real>
+			<key>timeStoppedRecording</key>
+			<real>814259782.44003904</real>
+			<key>title</key>
+			<string>Building project CharterCheckoutApp with scheme CharterCheckoutApp and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>7CDA6E50-68DD-4B2B-8DCB-DA12557FE596</string>
+		</dict>
 		<key>91761C24-202C-4120-8C57-2E0A9826EB02</key>
 		<dict>
 			<key>className</key>
@@ -47,48 +89,6 @@
 			<string>Building project CharterCheckoutApp with scheme CharterCheckoutApp and configuration Debug</string>
 			<key>uniqueIdentifier</key>
 			<string>91761C24-202C-4120-8C57-2E0A9826EB02</string>
-		</dict>
-		<key>B0C5ED68-CD7A-476A-9638-B146EFAF9D3C</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>B0C5ED68-CD7A-476A-9638-B146EFAF9D3C.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>CharterCheckoutApp project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>CharterCheckoutApp</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project CharterCheckoutApp with scheme CharterCheckoutApp and configuration Debug</string>
-			<key>timeStartedRecording</key>
-			<real>814187950.67788005</real>
-			<key>timeStoppedRecording</key>
-			<real>814187970.16352904</real>
-			<key>title</key>
-			<string>Building project CharterCheckoutApp with scheme CharterCheckoutApp and configuration Debug</string>
-			<key>uniqueIdentifier</key>
-			<string>B0C5ED68-CD7A-476A-9638-B146EFAF9D3C</string>
 		</dict>
 	</dict>
 </dict>

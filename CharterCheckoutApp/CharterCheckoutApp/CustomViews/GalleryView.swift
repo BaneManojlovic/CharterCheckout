@@ -19,7 +19,7 @@ struct GalleryView: View {
                 if photos.isEmpty {
                     placeholder
                 } else {
-                    ForEach(photos) { photo in
+                    ForEach(Array(photos.enumerated()), id: \.element.id) { index, photo in
                         AsyncImage(url: URL(string: photo.imageURL)) { phase in
                             switch phase {
                             case .success(let image):
@@ -31,11 +31,18 @@ struct GalleryView: View {
                             }
                         }
                         .clipped()
+                        // One accessibility element per page, whatever its load phase,
+                        // so each page has a stable identity for UI tests and VoiceOver.
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityAddTraits(.isImage)
+                        .accessibilityLabel("Photo \(index + 1) of \(photos.count)")
+                        .accessibilityIdentifier("gallery_image_item_\(index)")
                     }
                 }
             }
             .tabViewStyle(.page)
             .frame(height: 340)
+            .accessibilityIdentifier("gallery_carousel_container")
 
             HStack {
                 Button(action: onBackTap) {
