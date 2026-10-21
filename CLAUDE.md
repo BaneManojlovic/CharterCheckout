@@ -16,3 +16,6 @@
 ## Specialized Feature Testing
 - Before writing, editing, or modifying tests for a specific feature, check if a matching feature instruction sheet exists under the `tests/skills/` directory.
 - If a skill sheet is present, read its context constraints and prioritize those definitions over generic layouts.
+
+## System Check Routine
+- Whenever custom sub-skill modules are updated or introduced under `tests/skills/`, run `make validate-skills` to ensure structural alignment with master rules.
